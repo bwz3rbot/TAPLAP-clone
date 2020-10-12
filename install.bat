@@ -1,0 +1,1 @@
+mkdir ./database && npm i

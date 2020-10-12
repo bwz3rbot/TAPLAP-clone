@@ -1,0 +1,26 @@
+{
+  "name": "takeaplantleaveplant-clone",
+  "version": "1.0.0",
+  "description": "r/TakeAPlantLeaveAPlant bot clone",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "node src/test/wikiinittest.js",
+    "start": "start cmd . /k mongod --dbpath ./database && start cmd . /k node src/app.js",
+    "initDB": "start cmd . /k mongod --dbpath ./database",
+    "runs": "npm run initDB && node src/app.js"
+  },
+  "keywords": [
+    "reddit",
+    "snoowrap",
+    "bot",
+    "reddit-api"
+  ],
+  "author": "https://github.com/web-temps",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dateformat": "^3.0.3",
+    "dotenv": "^8.2.0",
+    "snoowrap": "^1.21.0"
+  }
+}
