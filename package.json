@@ -4,10 +4,11 @@
   "description": "r/TakeAPlantLeaveAPlant bot clone",
   "main": "src/app.js",
   "scripts": {
-    "test": "node src/test/wikiinittest.js",
+    "test": "node src/test/User.js",
     "start": "start cmd . /k mongod --dbpath ./database && start cmd . /k node src/app.js",
     "initDB": "start cmd . /k mongod --dbpath ./database",
-    "runs": "npm run initDB && node src/app.js"
+    "runs": "npm run initDB && node src/app.js",
+    "installWiki": "node src/install/WikiPagesInstaller.js"
   },
   "keywords": [
     "reddit",
@@ -21,6 +22,7 @@
     "colors": "^1.4.0",
     "dateformat": "^3.0.3",
     "dotenv": "^8.2.0",
+    "mongoose": "^5.10.9",
     "snoowrap": "^1.21.0"
   }
 }

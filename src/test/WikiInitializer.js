@@ -1,6 +1,8 @@
 const dotenv = require('dotenv').config({
     path: "./pw.env"
 });
-console.log("Requiring the Wiki-Initializer")
 const WikiInitializer = require('../service/Wiki/WikiInitializer');
-WikiInitializer.initWikiPages();
+(async () => {
+    console.log("RUNNING TEST!")
+    await WikiInitializer.runTest();
+})();
