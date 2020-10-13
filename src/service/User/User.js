@@ -8,7 +8,11 @@ class User {
         this.reviewCount = 0;
     }
     addReview = function (rating, type, comments) {
-        console.log("adding a new review: ", {rating, type, comments})
+        console.log("adding a new review: ", {
+            rating,
+            type,
+            comments
+        })
         const review = new Review(rating, type, comments);
         console.log("Pushing the review into list...")
         this.reviews.push(review)
@@ -31,18 +35,17 @@ class Review {
 async function runTest() {
 
     // const TestUser = new User("AUser");
-    // TestUser.addReview(5, "trade", "https://www.google.com");
+    // TestUser.addReview(5, "trade", "https://www.discord.com");
 
     // console.log("creating a new instance of :", mongo.AlphabetizedModels[0].model);
     // const instance = new mongo.AlphabetizedModels[0].model({
     //     username: TestUser.username,
     //     reviews: TestUser.reviews,
-    //     reviewCount: TestUser.reviewCount,
-    //     addReview: TestUser.addReview
+    //     reviewCount: TestUser.reviewCount
     // });
     // console.log("saving this instance:", instance)
 
-    // instance.save();
+    // await instance.save();
 
 
     // mongo.AlphabetizedModels[0].model.find({}, function (err, user) {
@@ -61,6 +64,10 @@ async function runTest() {
     console.log("Running User.js Test...")
     const user = await mongo.findUsersByFirstLetter("A");
     console.log(user)
+    anotherReview = new Review(1, "sale", "http://google.com");
+    user[0].reviews.push(anotherReview);
+    user[0].reviewCount++;
+    user[0].save();
 }
 module.exports = {
     runTest

@@ -29,14 +29,22 @@ const Schema = mongoose.Schema;
 const UserReviewTable = new Schema({
     username: String,
     reviews: Array,
-    reviewCount: Number,
-    addReview: Object
+    reviewCount: Number
 });
+UserReviewTable.methods.addReview = function (rating, type, comments) {
+    this.reviews.push({
+        rating,
+        type,
+        comments
+    })
+    this.reviewCount++;
+}
 const AlphabetizedModels = [];
 const initAlphabetizedModelsList = function () {
     console.log("Initializing the Alphabetized models list...")
     for (let i = 0; i < pages.list.length; i++) {
         const UserReviewModel = mongoose.model(pages.list[i], UserReviewTable);
+      
         console.log("Pushing: ", pages.list[i].toLowerCase());
         console.log("Pushing: ", UserReviewModel)
         AlphabetizedModels.push({
