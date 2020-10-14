@@ -1,1 +1,0 @@
-mkdir database && npm i

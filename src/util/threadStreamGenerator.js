@@ -36,7 +36,7 @@ const getSubmission = function () {
 }
 
 // 2. [Assign First UTC]
-const assignFirstUTC = async function (thread) {
+async function assignFirstUTC(thread) {
     if (logging) {
         console.log("assigning the first utc...");
         console.log("comments: ", thread.comments.length);

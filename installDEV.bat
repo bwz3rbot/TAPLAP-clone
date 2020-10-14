@@ -1,1 +1,0 @@
-mkdir database && npm link && node src/install/WikiPagesInstaller.js
