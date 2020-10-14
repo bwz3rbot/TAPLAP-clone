@@ -87,35 +87,53 @@ Once these fields are completely filled out, remove <i>EXAMPLE</i> from the end 
 
 > pw.envEXAMPLE = pw.env
 
-Once you've got your pw.env file correctly filled out and renamed, you may run the installer script to prepare your environment.\
-Before beginning this final step, be sure your bot account is granted admin rights on your subreddit.\
+Once you've got your pw.env file correctly filled out and renamed, you may create a directory for your database, install dependencies with npm, then run the WikiPagesInstaller script.\
+Before running installers, be sure your bot account is granted admin rights on your subreddit.\
 Also be sure the wiki is enabled for your subreddit and admins have write access.\
 And finally, be absoultely sure that you have created a thread for your bot to latch onto and set it correctly to THREAD_ID in pw.env\
-Now run the wikiInit script to initialize your wiki pages.\
+To fully install the bot, use these commands from within the root folder:
+```
+$ mkdir ./database
+$ npm i
+```
+Now run the wikiInit script to initialize your wiki pages.
+```
+$  node src/install/WikiPagesInstaller.js
+```
 This script will generate an index page at /r/YourSub/wiki/userdirectory/\
 It will run until its created all pages for the directory, A-Z and an etc for users with - or _ in their names.\
 If anything goes wrong during the installation or you wish to start fresh, you may run it again. All data will be wiped clean from the wiki. You will be left with a fresh index page and generated wiki pages A-Z & etc.
 
 ## Usage <a name = "usage"></a>
 
- Be sure that you've set up your pw.env file correctly and have run the installer and wikiInit scripts before running the bot. Also run the mongo script to start your database server. Running this script will start mongodb in the correct directory for the bot to find the files.
+ Be sure that you've set up your pw.env file correctly and have run the installer and wikiInit scripts before running the bot.\
+ Also before using the run script you must use the mongo script to run your mongo server in the correct location.\
+ The first time you use the script you must make it executable:
+ ```
+ $ sudo chmod +x mongo.sh
+ ```
+ Also while you're here you should make the run script executable:
+ ```
+ $ sudo chmod +x run.sh
+ ```
+Now that these two files have been given execute permissions on your device, they can be run.
 
- Always have mongo running before starting run script.
+Always have mongo running before starting run script.
 
- To start the bot use the run script.
+To start the bot use the run script.
 
- It will watch the thread you set in THREAD_ID for commands as explained in the generated wiki.
+It will watch the thread you set in THREAD_ID for commands as explained in the generated wiki.
 
- ## Backing Up Your Data <a name = "backup"></a>
+## Backing Up Your Data <a name = "backup"></a>
 
-It's strongly recommended that you back up your database! That is where all your user data is stored and if anything happens to it, its not going to be a good time for your subreddit. Luckily it's very easy to just copy the database directory from the folder and keep it somewhere safe. If anything happens to your bot's database, just delete the corrupt one and paste in the backup. It should all work out just fine. Any questions or comments can be sent to (https://reddit.com/u/bwz3r)
+It's strongly recommended that you back up your database! That is where all your user data is stored and if anything happens to it, its not going to be a good time for your subreddit. Luckily it's very easy to just copy the database directory from the folder and keep it somewhere safe. If anything happens to your bot's database, just delete the corrupt one and paste in the backup. It should all work out just fine. <strong>You should also note that you should never attempt this while the database is running. The files will not be correctly copied and will possibly destroy your data.</strong> Any questions or comments can be sent to (https://reddit.com/u/bwz3r)
 
- ## Here's an example of how your Wiki should look: <a name = "example"></a>
+## Here's an example of how your Wiki should look: <a name = "example"></a>
 
- -----
+-----
 
 
- <h1>🌿Welcome to The Greenhouse</h1>
+<h1>🌿Welcome to The Greenhouse</h1>
 
 <h1>User Directory</h1>
 
