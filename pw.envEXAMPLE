@@ -7,5 +7,5 @@ MASTER_SUB=''
 LIMIT="9"
 DEBUG_CODE="false"
 DEBUG_NETWORK="false"
-THREAD_ID=""
 WIKI_WELCOME_MESSAGE="🌿Welcome to The Greenhouse"
+THREAD_ID="ja6v32"

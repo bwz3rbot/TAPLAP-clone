@@ -1,61 +1,159 @@
-https://www.reddit.com/wiki/wiki
+# takeaplantleaveplant-clone
 
-    Reddit Wiki System Guide
-        Enabling The Wiki For Your Subreddit
-            User
-            Moderator
-        How to edit an existing wiki page
-        How to make a new wiki page
-        How to make a new category
-        How to add a table of contents
+## Table of Contents
 
-Reddit Wiki System Guide
+- [About](#about)
+- [Getting Started](#getting_started)
+- [Usage](#usage)
+- [Contributing](../CONTRIBUTING.md)
 
-This page aims to give an overview on how Reddit's wiki system works from a perspective of both users and moderators. Each heading will describe a feature and feature individual sections, one for an average user and the other for the subreddit moderator. For the purposes of this page, we will use SUB in the place of a subreddit name where appropriate.
-Enabling The Wiki For Your Subreddit
-User
+## About <a name = "about"></a>
 
-A moderator must enable the wiki for their subreddit. Please contact the moderators of your subreddit if you wish to use the wiki system.
-Moderator
+Write about 1-2 paragraphs describing the purpose of your project.
 
-To enable the wiki system, you must navigate to your 'community settings' (/r/SUB/about/edit/) and look for the 'wiki' heading. From there, you have three options:
+## Getting Started <a name = "getting_started"></a>
 
-    disabled This is the default option.
-    mod editing This option allows moderators to create and edit pages. In addition to this, each page has their own individual settings where a moderator can allow other users to edit pages (which will be covered later on this page).
-    anyone This setting allows any user to create and edit wiki pages. This setting as two additional options:
-        Subreddit karma required to edit and create wiki pages This is the minimum of total karma (gained in your subreddit) required to create or modify a wiki page. The default is 0, which allows anyone access. This number takes into account the maximum of either comment or submission karma in your subreddit.
-        Account age (days) required to edit and create wiki pages This is the minimum account age that is allowed to edit or create wiki pages. The default is 0.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
-How to edit an existing wiki page
+### Prerequisites
 
-To edit an existing wiki page, just click the edit button right there on the page. The editing box supports the standard markdown syntax used for commenting, so bolding, headings, lists, tables and so on can be used, just as they can be used in regular reddit comments.
+The first step if you have not done so yet is to enable the wiki for your subreddit.\
+To enable the wiki system, navigate to 'community settings' (https://reddit.com/r/SUB/about/edit/) and select the 'wiki' heading.\
+Click the dropdown and select 'mods only' to allow mods to edit the pages.\
+Once your bot account is configred, you'll have to give it mod access to edit these pages.\
+It will also need mod access to set the selected sort of a command thread to new.\
+Be sure that Karma and Age of Reddit account fields are also set to 0.\
 
-Once you click Save, your edits will be committed.
-How to make a new wiki page
 
-To make a new wiki page, try and navigate to the page - that is, enter the URL of the intended page into the browser's address bar. For example, to create a page called "help" in the "meta" category, try and access this address:
+Make sure you have the correct version of NodeJS for your system. You can find the download here(https://nodejs.org/en/download/)
 
-http://www.reddit.com/r/SUBREDDITNAME/wiki/meta/help
+You'll have to create a new account for your bot before you move any further.\
+And you'll have to grant the account permissions on your subreddit.\
+Once the account is created, log in, go to this url(reddit.com/prefs/apps), and fill out the form to create a new script app.
 
-If the page does not exist, and you have sufficient permissions, you'll see a "create page" link on the resulting "page not found" screen. Click the "create page" link and the editing screen will be displayed. Once you click Save, the page will be created.
 
-Note: if you want to create a page outside a category (eg. at the top level of the wiki), the above applies - just leave out the category in the URL. So, for example, to create a top-level page called "index", use this address:
 
-http://www.reddit.com/r/SUBREDDITNAME/wiki/index
+<img src='https://i.imgur.com/yq8akJ7.png'>
 
-How to make a new category
 
-If you'd like to make a folder in the wiki, which is to contain other pages, simply create the subpages. The category will be created automatically. So, for example, to make categories called "exampleA", "exampleB", "exampleC", with subpages "pageX", "pageY", and "pageZ" respectively, use the "create page" link on the following URLs:
 
-http://www.reddit.com/r/SUBREDDITNAME/wiki/exampleA/pageX
-http://www.reddit.com/r/SUBREDDITNAME/wiki/exampleB/pageY
-http://www.reddit.com/r/SUBREDDITNAME/wiki/exampleC/pageZ
+```
+Give examples
+```
 
-Note: a "category page" is not automatically created by reddit. To continue with the above example, making a page called "pageY" in the "exampleB" category does not automatically create a page called "exampleB". This can be created manually, if desired, using the URL:
+### Installing
+Now that you've set up your bot account, granted it permissions on your subreddit, and created a script app, it's time to download the source code and paste in your environment variables.
 
-http://www.reddit.com/r/SUBREDDITNAME/wiki/exampleB
+Download the .zip file containing the source code on this page. Unzip it and save it to your computer somewhere. Now open up the pw.envEXAMPLE file.\
+Also have open reddit.com/prefs/apps as you'll need to copy/paste the items you'll find there.\
+<strong>USER_AGENT</strong> is just a name that the server will identify your bot by. It can be whatever you want.\
+<strong>CLIENT_ID</strong> and <strong>CLIENT_SECRET</strong> are fround in prefs/apps.\
+<strong>REDDIT_USER</strong> is your bots username.\
+<strong>REDDIT_PASS</strong> is its password.\
+<strong>MASTER_SUB</strong> is the subreddit it will work on.\
+<strong>LIMIT</strong> will cause the bot to check this many items per sweep. It takes a bit longer to start up, but can accomodate for more requests the higher you set it with a maximum of 25. Setting this value higher will ensure that when stopping and restarting the bot, no requests are forgotten.\
+<strong>DEBUG_CODE</strong> and <strong>DEBUG_NETWORK</strong> can bet set to false unless any problems arise.\
+<strong>WIKI_WELCOME_MESSAGE</strong> will be displayed in the top of your generated wiki index page.\
+<strong>THREAD_ID</strong> You will have to go into your subreddit and create a new thread. I suggest pinning it so that users can see it and easily use it. Once it is created you'll have to copy and paste the id from the url bar into this field. The bot works by latching onto this thread and setting suggested sort to new, then continously streaming in the latest requests and handling them in a queue. This field is definately required before starting your bot. It may be changed at any time if you decide to start a new command thread.\
+See the below example of a url. The id will be used in the pw.envEXAMPLE file as a reference. Copy the id from the thread you create just like this one:
+```
+https://www.reddit.com/r/Bwz3rBot/comments/ja6v32/bot_command_thread/
+```
 
-If this is done, the category page will adopt all the subpages in that category, so that in the "all pages" listing, the category page is listed first, with its subpages listed underneath.
-How to add a table of contents
 
-The "table of contents" is the menu at the top-right of the page, listing each heading in the page. This table is created automatically by reddit. To list a section of the page in the table of contents, simply give it a heading, using the standard heading markdown syntax such as ###.
+
+
+
+    USER_AGENT=''
+    CLIENT_ID=''
+    CLIENT_SECRET=''
+    REDDIT_USER=''
+    REDDIT_PASS=''
+    MASTER_SUB=''
+    LIMIT='9'
+    DEBUG_CODE="false"
+    DEBUG_NETWORK="true"
+    WIKI_WELCOME_MESSAGE="🌿Welcome to The Greenhouse"
+    THREAD_ID="ja6v32"
+    
+
+
+Once these fields are completely filled out, remove <i>EXAMPLE</i> from the end of the filename.
+
+> pw.envEXAMPLE = pw.env
+
+Once you've got your pw.env file correctly renamed, you may use installer.sh to prepare your environment.\
+Before beginning this final step, be sure your bot account is granted admin rights on your subreddit.\
+Also be sure the wiki is enabled for your subreddit and admins have write access.\
+And finally, be absoultely sure that you have created a thread for your bot to latch onto and set it correctly to THREAD_ID in pw.env\
+Now use wikiInit.sh to initialize your wiki pages.\
+This script will generate an index page at /r/YourSub/wiki/userdirectory/\
+It will run until its created all pages for the directory, A-Z and an etc for users with - or _ in their names.\
+If anything goes wrong during the installation or you wish to start fresh, you may run it again. All data will be wiped clean from the wiki. You will be left with a fresh index page and generated wiki pages A-Z & etc.
+
+## Usage <a name = "usage"></a>
+
+ Be sure that you've set up your pw.env file correctly and run the installer.sh and wikiInit.sh, use mongo.sh to start your database server. Running this script will start mongod in the correct directory for the bot to find the files.
+
+ Always have mongo.sh running before starting the bot.\
+
+ To start the bot use run.sh\
+
+ It will watch the thread you set in THREAD_ID for commands as explained in the generated wiki.
+
+ Here's an example of how your wiki should look:
+
+ -----
+
+
+ <h1>🌿Welcome to The Greenhouse</h1>
+
+<h1>User Directory</h1>
+
+Here is a directory of all users who have traded on r/Bwz3rBot along with links to the trade discussion threads.
+
+All users are stored alphabetically. Usernames beginning with special characters can be found within the ___etc___ section.
+
+
+
+[A](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/a) |
+ [B](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/b) |
+ [C](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/c) |
+ [D](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/d) |
+ [E](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/e) |
+ [F](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/f) |
+ [G](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/g) |
+ [H](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/h) |
+ [I](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/i) |
+ [J](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/j) |
+ [K](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/k) |
+ [L](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/l) |
+ [M](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/m) |
+ [N](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/n) |
+ [O](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/o) |
+ [P](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/p) |
+ [Q](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/q) |
+ [R](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/r) |
+ [S](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/s) |
+ [T](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/t) |
+ [U](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/u) |
+ [V](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/v) |
+ [W](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/w) |
+ [X](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/x) |
+ [Y](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/y) |
+ [Z](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/z) |
+ [etc](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/etc)
+
+-----
+
+<h1>How to use this bot?</h1>
+
+Users may submit reviews to this [bot command thread](/r/Bwz3rBot/comments/jaha01).
+
+Commands must be formated with a directive of `!rate`. The first command argument must be the name of the user to be updated. The second argument must be a rating number between 1 and 5 followed by the word stars. The next arg must be the type of interaction. Was it either (a. sale, b. trade, c. giveaway)? If no type is specified, it defaults to a sale. All arguments following interaction type will be converted to a string, and will go into the comments section of the review. Command MUST contain an interaction type of you wish to include a comment.
+
+`!rate u/Bwz3r 5 stars sale We had a great interaction! I'm rating u/Bwz3r 5 stars!`
+
+This command will be processed by the bot and will find u/Bwz3r within the database. If the user does not exist within the database, the user will be added to the list of reviewed users and will retain the rating given along with any comments, and a link to the command comment. Any future ratings received by this user will be added to their file and any changes made will be instantly updated in the user directory under their alphabetized page. Users scores will be averaged according to number of reviews / scores rounded down. Stars will be awarded each user according to their calculated average rating. Any questions or errors found while using the bot can be submitted to u/Bwz3r. Thank you for reading!
+
+-----
