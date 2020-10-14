@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const {
     WikiPages
-} = require('./WikiPages');
+} = require('./wikipages');
 const pages = new WikiPages();
 const __ = require('colors');
 

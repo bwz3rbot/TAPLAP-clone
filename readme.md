@@ -32,7 +32,9 @@ Make sure you have the correct version of NodeJS for your system. You can find t
 Instructions on installing node on a raspberry pi can be found here: (https://linuxize.com/post/how-to-install-node-js-on-raspberry-pi/).
 
 
-Also install MongoDB as this bot requires a database to function. Instructions for windows, mac and raspberry pi can be found here: (https://diyprojects.io/mongodb-part-1-installation-windows-macos-raspberry-pi/)
+Also install MongoDB as this bot requires a database to function. Instructions for windows, mac and raspberry pi 4 can be found here: https://diyprojects.io/mongodb-part-1-installation-windows-macos-raspberry-pi/\
+Instructions for Raspberry Pi 3 Here: https://andyfelong.com/2019/03/mongodb-4-0-6-64-bit-on-raspberry-pi-3/\
+This project has been tested to work on a Windows Machine.
 
 You'll have to create a new account for your bot before you move any further.\
 And you'll have to grant the account permissions on your subreddit.\
