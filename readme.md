@@ -1,19 +1,19 @@
-# takeaplantleaveplant-clone
+# Wiki Review Bot
 
 ## Table of Contents
 
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Usage](#usage)
-- [Contributing](../CONTRIBUTING.md)
 
 ## About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+This Reddit bot will generate a user directory wiki for your subreddit. It will follow a defined command thread which allows users to rate other users they have had interactions with. Users may use the command `!rate u/bwz3r 5 stars` to give u/bwz3r a 5 star rating!\
+Further instructions on how to format commands are defined below, and will be auto-generated in your wiki upon running the wikiInitializer script.
 
 ## Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine.
 
 ### Prerequisites
 
