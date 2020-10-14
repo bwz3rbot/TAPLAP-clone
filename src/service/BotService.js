@@ -5,25 +5,27 @@ const User = require('./User/User');
 const cmd = require('../common/Command').command;
 const Markdown = require('../util/SnooMD').Markdown;
 const md = new Markdown();
+const wikiLink = md.link(`https://www.reddit.com/r/${process.env.MASTER_SUB}/wiki/userdirectory`, 'Wiki');
 
 async function doSomething(item) {
     // First Check the item was saved.
     if (!item.saved) {
         console.log(`processing item: ${item.body}`.magenta);
         let command = cmd(item.body);
-
-        // If the command was received with a backslash at index[0], remove it
-        if (command.args.length && command.args[0].startsWith("\\")) {
-            let newString = command.args[0].replace("\\", "");
-            command.args[0] = newString;
-        }
-
-        // If the comment was a command, process.
         if (command) {
-            await processCommand(command, item);
+
+            // If the command was received with a backslash at index[0], remove it
+            if (command.args.length && command.args[0].startsWith("\\")) {
+                let newString = command.args[0].replace("\\", "");
+                command.args[0] = newString;
+            }
+
+            // If the comment was a command, process.
+            if (command) {
+                await processCommand(command, item);
+            }
+
         }
-
-
 
         // Save the item after processing
         await saveItem(item);
@@ -46,7 +48,7 @@ async function processCommand(command, item) {
                 } else { // If valid username:
 
                     try {
-                        // Validate interaction type, default to "sale" if none exists
+                        validateUserNotRatingSelf(command.args[0], item);
                         validateRatingNumber(command.args[1]);
                         validateInteractionType(command.args[3]);
                     } catch (err) {
@@ -58,36 +60,46 @@ async function processCommand(command, item) {
                     // Finally, update the user in the database
                     await updateUser(command, item);
                     // And reply with a link to the wiki
-                    console.log("Replying with success message...".green)
-                    const link = md.link(`https://www.reddit.com/r/${process.env.MASTER_SUB}/wiki/userdirectory/${command.args[0][0].toLowerCase()}`, 'Wiki');
-                    await requester.getComment(item.id).reply(`Your rating has been stored! Thanks for making this sub a better place to trade in. Go see your comment in our ${link}.`);
+                    await replyWithLink(command, item);
+
                 }
             } else { // Command arguments were invalid (less than 2 args received)
                 await errorMessage(item, "Check your command arguments!");
             }
             break;
 
+        case "help":
+            await requester.getComment(item.id).reply(`Check out our ${wikiLink} for more information on how to use this bot!`);
+            return;
+
+
         default: // Command directive not recognized
-            console.log("Error processing command.".red);
+            console.log(`Error processing command. Replying with error message 'oops'.`.red);
             await errorMessage(item, "Oops!");
             break;
     }
 
 }
 
+async function replyWithLink(command, item) {
+    console.log("Replying with success message...".green);
+    let userCategory = command.args[0][0].toLowerCase();
+    let dashes = new RegExp(/[\-\_]/);
+    if (dashes.test(userCategory)) {
+        userCategory = "etc";
+    }
+    const link = md.link(`https://www.reddit.com/r/${process.env.MASTER_SUB}/wiki/userdirectory/${userCategory}`, 'Wiki');
+    await requester.getComment(item.id).reply(`Your rating has been stored! Thanks for making this sub a better place to trade in. Go see your comment in our ${link}.`);
+}
 const validateRatingNumber = function (number) {
     console.log("Validating rating number...".yellow, number);
     let testNumber = new RegExp(/[^0-5]/);
     if (number) {
-        console.log("number exists. testing...")
         if (testNumber.test(parseInt(number))) {
-            console.log("Test failed!".red);
             throw new Error("Rating be a number between 0 and 5.")
-        } else {
-            console.log("Test passed!".green);
         }
     }
-    
+
 
 }
 const validateInteractionType = function (type) {
@@ -108,7 +120,13 @@ const validateInteractionType = function (type) {
         // Set to lower case before sending to the user service.
         type = type.toLowerCase();
     }
-    console.log("Validated Interaction Type: ", type);
+}
+
+const validateUserNotRatingSelf = function (username, item) {
+    console.log("Validating user not rating self...".magenta);
+    if (username === item.author.name) {
+        throw new Error("Nice try, but you can't rate yourself!");
+    }
 }
 
 // Update the user

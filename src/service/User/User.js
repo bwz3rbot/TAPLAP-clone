@@ -8,24 +8,15 @@ class User {
         this.reviews = [];
         this.reviewCount = 0;
     }
-    addReview = function (rating, type, comments,permalink) {
-        console.log("adding a new review: ", {
-            rating,
-            type,
-            comments,
-            permalink
-        })
+    addReview = function (rating, type, comments, permalink) {
         const review = new Review(rating, type, comments, permalink);
-        console.log("Pushing the review into list...")
-        this.reviews.push(review)
-        console.log("Reviews: ", this.reviews)
-        console.log("incremeing review count...")
         this.reviewCount++;
+        this.reviews.push(review);
     }
 }
 
 class Review {
-    constructor(rating, type, comments,permalink) {
+    constructor(rating, type, comments, permalink) {
         this.rating = rating
         this.type = type
         this.comments = comments
@@ -36,9 +27,7 @@ class Review {
 
 // [Update User Function] -- called from bot commands
 async function update(command, permalink) {
-    console.log("User Service processing update request...".magenta);
-    console.log("Received this command: ", command);
-
+    console.log("User Service processing update user request...".yellow);
     // First strip any /u/ from the beginning of the username
     command.args[0] = stripSlashes(command.args[0]);
     // First check if user exists within the database...
@@ -49,7 +38,7 @@ async function update(command, permalink) {
         console.log("No user found. Storing new data...".red);
         await storeNewUserData(command, permalink);
     } else {
-        console.log("Found user within the database... Updating. User: ".green, foundUser);
+        console.log("Found user within the database. Updating...: ".green);
         // If user does exist, simply add a new Review and save
         await updateUser(foundUser, command, permalink);
     }
@@ -67,31 +56,32 @@ async function update(command, permalink) {
 // Check for an existing user in the database by username
 // Returns the user(document) if found
 async function checkExistingUser(username) {
-    console.log("Checking for an existing user by username: ", username);
+    console.log("Checking for an existing user by username: ".yellow, username);
     // Find the model for the first letter of the username
     let model = getAlphabetizedModel(username);
-    console.log("Finding user: ", username);
     const foundUser = await model.model.findOne({
         username: username
     });
-    console.log("Found this user: ", foundUser);
     return foundUser;
 }
 
 // Store a new user in the database with a single review.
 async function storeNewUserData(command, permalink) {
-    console.log("Building new user from command: ".magenta, command)
+    console.log("Building new user from command: ".magenta, command);
     const NewUser = new User(command.args[0]);
     let username = command.args[0];
     let ratingNumber = command.args[1];
     let interactionType = command.args[3];
+    if (interactionType == null) {
+        interactionType = "sale";
+    }
     // If comments are present within the arguments, build them into a string.
     let comments = "No comment."
-    console.log("Length of args: ".magenta, command.args.length)
     if (command.args.length > 3) {
         comments = buildCommentString(command.args.slice(4, command.args.length));
     }
-    console.log("Adding a new review...")
+
+    // Add the built review to the model and persist it to the database
     NewUser.addReview(ratingNumber, interactionType, comments, permalink);
     let model = getAlphabetizedModel(username);
     const instance = new model.model({
@@ -99,32 +89,28 @@ async function storeNewUserData(command, permalink) {
         reviews: NewUser.reviews,
         reviewCount: NewUser.reviewCount
     });
-    console.log("Awaiting saving the instance...")
+    console.log("persisting new user to mongo...".bgBlue.white);
     await instance.save();
 }
 
 // Update an existing user already found within the database
 async function updateUser(user, command, permalink) {
-    console.log("UPDATING USER...".magenta);
-    let username = command.args[0];
+    console.log("Updating existing user: ", command.args[0]);
     let ratingNumber = command.args[1];
-    let interactionType = command.args[3] > 0 | "sale";
-    let comments = "No comment."
-    console.log("Length of args: ".yellow, command.args.length)
-    if (command.args.length > 3) {
-        console.log("Length was greater than 3. Building the comment string...");
-        comments = buildCommentString(command.args.slice(3, command.args.length));
-        console.log("Comment string: ", comments);
+    let interactionType = command.args[3];
+    if (interactionType == null) {
+        interactionType = "sale";
     }
-    console.log("Building a new review object...")
-    let review = new Review(parseInt(ratingNumber), interactionType, comments, permalink);
-    console.log(review);
+    // Build the comment string from args greater than 3
+    let comments = "No comment."
+    if (command.args.length > 3) {
+        comments = buildCommentString(command.args.slice(4, command.args.length));
+    }
 
-    console.log("Pushing new review into user reviews...".magenta);
+    let review = new Review(parseInt(ratingNumber), interactionType, comments, permalink);
     user.reviews.push(review);
     user.reviewCount++;
-    console.log("reviews and count now: ", user);
-    console.log("saving the user...".yellow);
+    console.log("persisting user to mongo...".yellow);
     await user.save();
 }
 
@@ -132,7 +118,6 @@ async function updateUser(user, command, permalink) {
 
 // Strip Slashes from username (removes '/u/' or 'u/' if existing)
 const stripSlashes = function (username) {
-    console.log("Stripping any slashes...");
     // Strip the u/ if exists
     if (username.startsWith("u/")) {
         username = username.replace("u/", "").trim();

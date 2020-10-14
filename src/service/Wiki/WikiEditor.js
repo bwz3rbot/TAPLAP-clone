@@ -31,7 +31,7 @@ const generateDirectory = function (page) {
 
 // Edit Wiki Page
 async function editWikiPage(page) {
-    console.log("Updating Wiki Page: ".yellow, page);
+    console.log("Building new Wiki Page: ".yellow, page);
  
     // Get the correct page and generate a directory
     let p = page.replace("userdirectory/", "");
@@ -56,7 +56,6 @@ async function editWikiPage(page) {
         const fUsername = `#${user.username}`;
         AllTables.push(fUsername);
         const score = calculateScore(user);
-        console.log("Calculated Score: ", score)
         let stars = "";
         let c = 0;
         for (c; c < score; c++) {
@@ -77,10 +76,10 @@ async function editWikiPage(page) {
 
     // Format the data into strings
     let AllTablesString = AllTables.join("\n\n");
-    console.log("Updating the wiki page...".magenta);
     const fullMessage = dir + "\n\n" + AllTablesString;
 
     // Update the wiki page
+    console.log("Committing changes...".magenta);
     await requester.getSubreddit(process.env.MASTER_SUB).getWikiPage(page).edit({
         reason: `New user data added.`,
         text: fullMessage
@@ -92,9 +91,7 @@ async function editWikiPage(page) {
 // Takes in a user and gets the average score
 // Returns how many 
 const calculateScore = function (user) {
-    console.log("Calculating Score from User: ", user)
     const count = user.reviewCount;
-    console.log("User Review Count: ", count);
     let total = 0;
     user.reviews.forEach(review => {
         total += parseInt(review.rating);
