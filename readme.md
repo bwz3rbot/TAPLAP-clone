@@ -31,6 +31,13 @@ Make sure you have the correct version of NodeJS for your system. You can find t
 
 Instructions on installing node on a raspberry pi can be found here: (https://linuxize.com/post/how-to-install-node-js-on-raspberry-pi/).
 
+If you get this error when running see here(https://stackoverflow.com/questions/49209020/wire-version-doesnt-support-for-nodejs-in-mongodb): 
+```
+ConfigurationError: Server at xxxxx:27017 reports wire version 0, but this version of nodejs requires at least 2 (MongoDB 2.6).
+```
+
+
+
 
 Also install MongoDB as this bot requires a database to function. Instructions for windows, mac and raspberry pi 4 can be found here: https://diyprojects.io/mongodb-part-1-installation-windows-macos-raspberry-pi/
 
