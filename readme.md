@@ -27,7 +27,7 @@ It will also need mod access to set the selected sort of a command thread to new
 Be sure that Karma and Age of Reddit account fields are also set to 0.\
 
 
-Make sure you have the correct version of NodeJS for your system. You can find the download here (https://nodejs.org/en/download/)\
+Make sure you have the correct version of NodeJS for your system. You can find the download here (https://nodejs.org/en/download/).\
 Also install MongoDB as this bot requires a database to function. Instructions for windows, mac and raspberry pi can be found here: (https://diyprojects.io/mongodb-part-1-installation-windows-macos-raspberry-pi/)
 
 You'll have to create a new account for your bot before you move any further.\
