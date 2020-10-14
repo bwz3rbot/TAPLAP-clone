@@ -27,21 +27,13 @@ It will also need mod access to set the selected sort of a command thread to new
 Be sure that Karma and Age of Reddit account fields are also set to 0.
 
 
-Make sure you have the correct version of NodeJS for your system. You can find the download here (https://nodejs.org/en/download/).
-
-Instructions on installing node on a raspberry pi can be found here: (https://linuxize.com/post/how-to-install-node-js-on-raspberry-pi/).
-
-If you get this error when running see here(https://stackoverflow.com/questions/49209020/wire-version-doesnt-support-for-nodejs-in-mongodb): 
-```
-ConfigurationError: Server at xxxxx:27017 reports wire version 0, but this version of nodejs requires at least 2 (MongoDB 2.6).
-```
+Make sure you have the correct version of NodeJS for your system. You can find the official downloads here https://nodejs.org/en/download/
 
 
+Also install MongoDB as this bot requires a database to function. Official installation documentation for mongodb can be found here: https://docs.mongodb.com/manual/administration/install-community/
 
-
-Also install MongoDB as this bot requires a database to function. Instructions for windows, mac and raspberry pi 4 can be found here: https://diyprojects.io/mongodb-part-1-installation-windows-macos-raspberry-pi/
-
-Instructions for downloading mongodb on a Raspberry Pi 3 Here: https://andyfelong.com/2019/03/mongodb-4-0-6-64-bit-on-raspberry-pi-3/
+Here is an extremely [helpful tutorial](https://yannickloriot.com/2016/04/install-mongodb-and-node-js-on-a-raspberry-pi/) I found that may will instruct you on how to install both of these dependencies on a Raspberry Pi. Using the package downloads from this tutorial together will ensure that your versions are correctly matched up.\
+I recomend a fresh install of your Pi, in case there could be any conflicting software previously installed.
 
 <b>This project has been tested to work on a Windows Machine.</b>
 
