@@ -44,15 +44,11 @@ const initAlphabetizedModelsList = function () {
     console.log("Initializing the Alphabetized models list...")
     for (let i = 0; i < pages.list.length; i++) {
         const UserReviewModel = mongoose.model(pages.list[i], UserReviewTable);
-      
-        console.log("Pushing: ", pages.list[i].toLowerCase());
-        console.log("Pushing: ", UserReviewModel)
         AlphabetizedModels.push({
             category: pages.list[i].toLowerCase(),
             model: UserReviewModel
         })
     }
-    console.log("Alphabetized Models:", AlphabetizedModels)
 }
 initAlphabetizedModelsList();
 
@@ -60,9 +56,7 @@ async function findUsersByFirstLetter(username) {
     let firstLetter = username[0].toLowerCase();
     console.log("Finding user by username... first letter: ", firstLetter);
     let match = false;
-    console.log("Iterating over categories of pages.list...")
     for (const category of pages.list) {
-        console.log("Category: ", category)
         if (category.toLowerCase() == firstLetter.toLowerCase()) {
             match = true;
         }

@@ -30,13 +30,19 @@ const mongo = require('../config/mongo');
     });
     instance.save();
 
-    AlphabetizedModels[1].model.find({}, function (err, user) {
-        // docs.forEach
-        console.log("Found this user: ", user)
-      });
+    console.log("Finding user...")
+    const foundUser = await AlphabetizedModels[1].model.find({
+        username: 'Bwz3r'
+    });
 
-    const user = await AlphabetizedModels[1].model.findOne({
-        username: "Bwz3r"
-    }).exec();
-    console.log(user)
+    console.log("Found user: ", foundUser)
+    // AlphabetizedModels[1].model.find({}, function (err, user) {
+    //     // docs.forEach
+    //     console.log("Found this user: ", user)
+    //   });
+
+    // const user = await AlphabetizedModels[1].model.findOne({
+    //     username: "Bwz3r"
+    // }).exec();
+    // console.log(user)
 })();

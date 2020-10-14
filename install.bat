@@ -1,1 +1,1 @@
-mkdir database && npm i && node src/install/WikiPagesInstaller.js
+mkdir database && npm i

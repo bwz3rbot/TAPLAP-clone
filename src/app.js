@@ -8,6 +8,3 @@ const mongo = require('./config/mongo');
 
 const thread = require('./util/threadStreamGenerator');
 thread.streamUnreads();
-
-const WikiEditor = require('./service/Wiki/WikiEditor');
-WikiEditor.run();

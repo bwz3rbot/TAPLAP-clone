@@ -2,8 +2,8 @@ const
     colors = require('colors'),
     EventEmitter = require('events'),
     dateFormat = require('dateformat'),
-    snoowrap = require('../config/snoo-config').streamRequester,
-    actionRequester = require('../config/snoo-config').actionRequester,
+    snoowrap = require('../config/snoo').streamRequester,
+    actionRequester = require('../config/snoo').actionRequester,
     BotService = require('../service/BotService'),
     timeout = 20000,
     logging = JSON.parse(process.env.DEBUG_CODE) || false,
@@ -38,11 +38,19 @@ const getSubmission = function () {
 
 // 2. [Assign First UTC]
 const assignFirstUTC = function (thread) {
-    console.log("assigning the first")
-    previousCommentUTC = parseInt(thread.comments[0].created_utc)
+    console.log("assigning the first");
+    console.log("comments: ", thread.comments.length)
+    if (thread.comments.length === 0) {
+        console.log("Length of comments object was 0. Initializing with a comment!".yellow)
+        return snoowrap.getSubmission(process.env.THREAD_ID).reply("Beep Boop I am a bot.")
+            .then(streamUnreads)
+            .catch(err => console.log)
+    }
+    console.log("Comment found.".green)
+    previousCommentUTC = parseInt(thread.comments[0].created_utc);
     let count = 0;
     thread.comments.forEach(comment => {
-        if (count <= parseInt(limit)) {
+        if (count <= parseInt(limit - 1)) {
             commentEmitter.emit('comment', comment)
         }
         count++
@@ -51,18 +59,14 @@ const assignFirstUTC = function (thread) {
 
 // 3. [Stream In Mentions]]
 const streamInComments = function () {
-
     // 3.a) Checks inbox at an interval of 20 seconds
     setInterval(() => {
         if (logging) {
             console.log("checking again...")
         }
-
         snoowrap.getSubmission(process.env.THREAD_ID)
             .setSuggestedSort('new')
             .fetch().then((submission) => {
-
-
                 // 3.b) If a new item exists in the listing,
                 submission.comments.forEach(comment => {
                     let created = comment.created_utc
@@ -71,7 +75,6 @@ const streamInComments = function () {
                     }
                 })
                 previousCommentUTC = parseInt(submission.comments[0].created_utc)
-
             })
     }, timeout)
 }
@@ -88,23 +91,19 @@ const runOnceIndefinately = function () {
         newItem = newItems.pop()
         return actionRequester.getComment(newItem.id).fetch()
             .then((item) => {
-
                 // BOT SERVICE CODE RUNS HERE!!
                 BotService.doSomething(item)
                     .then(runOnceIndefinately)
-
             })
     } else {
         if (logging) {
             formattedDate = dateFormat(Date.now())
             console.log(formattedDate + `|  there are no items left in the queue! checking again in ${timeout} seconds...`.magenta)
         }
-
         setTimeout(() => {
             runOnceIndefinately()
         }, timeout)
     }
-
 }
 
 

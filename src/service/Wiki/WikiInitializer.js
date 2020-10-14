@@ -7,11 +7,7 @@ const {
     Markdown
 } = require('../../util/SnooMD');
 const md = new Markdown();
-const snoowrap = require('../../config/snoo');
-const {
-    bold
-} = require('colors');
-const requester = snoowrap.wikiRequester;
+const requester = require('../../config/snoo').wikiRequester;
 
 // Initialize the Wiki Pages
 async function initWikiPages() {
@@ -34,10 +30,11 @@ async function generateIndex() {
     const directory = generateDirectory("userdirectory");
 
     const howToUse =
-        `#How to Use\n\n` +
-        `Users may submit reviews to this ${md.link("https://www.reddit.com/fail_link","bot command thread")}.\n\n` +
-        `Commands must be formated as such:\n\n` +
-        md.apply(`u/${process.env.REDDIT_USER} !command arg1 arg2 arg3`, md.codeblock);
+        `#How to use this bot?\n\n` +
+        `Users may submit reviews to this ${md.link(`/r/${process.env.MASTER_SUB}/comments/${process.env.THREAD_ID}`,"bot command thread")}.\n\n` +
+        `Commands must be formated with a directive of \`!rate\`. The first command argument must be the name of the user to be updated. The second argument must be a rating number between 1 and 5 followed by the word stars. The next arg must be the type of interaction. Was it either (a. sale, b. trade, c. giveaway)? If no type is specified, it defaults to a sale. All arguments following interaction type will be treated as a sentence, and will go into the comments section of the review. Command MUST contain an interaction type of you wish to include a comment.\n\n` +
+        md.apply(`!rate u/Bwz3r 5 stars sale We had a great interaction! I'm rating u/Bwz3r 5 stars!`, md.codeblock) + "\n\n" +
+        `This command will be processed by the bot and will find u/Bwz3r within the database. If the user does not exist within the database, the user will be added to the list of reviewed users and will retain the rating given along with any comments, and a link to the command comment. Any future ratings received by this user will be added to their file and any changes made will be instantly updated in the user directory under their alphabetized page. Users scores will be averaged according to number of reviews / scores rounded down. Stars will be awarded each user according to their calculated average rating. Any questions or errors found while using the bot can be submitted to u/Bwz3r. Thank you for reading!`
 
     let fullmsg = introduction + "\n\n" + directory + "\n\n" + howToUse
 
@@ -66,11 +63,14 @@ const generateDirectory = function (page) {
         if (pagelist[i] === page) {
             text = md.apply(text, md.bold);
         }
+
         const link = md.link(`https://www.reddit.com/r/${process.env.MASTER_SUB}/wiki/${pages.category}/${pagelist[i].toLowerCase()}`, text);
         links.push(link)
     }
+ 
     let linkstring = links.join(" |\n ");
     return linkstring.concat("\n\n-----");
+
 }
 
 async function getWikiPage(name) {
