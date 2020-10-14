@@ -37,11 +37,14 @@ const getSubmission = function () {
 
 // 2. [Assign First UTC]
 const assignFirstUTC = function (thread) {
-    console.log("assigning the first");
-    console.log("comments: ", thread.comments.length);
+    if (logging) {
+        console.log("assigning the first utc...");
+        console.log("comments: ", thread.comments.length);
+    }
+
     if (thread.comments.length === 0) {
-        console.log("Length of comments object was 0. Initializing with a comment!".yellow);
-        return snoowrap.getSubmission(process.env.THREAD_ID).reply("Beep Boop I am a bot.")
+        console.log("No comments found. Setting initial comment!".yellow);
+        return snoowrap.getSubmission(process.env.THREAD_ID).reply(`Beep Boop...`)
             .then(streamUnreads)
             .catch(err => console.log(err));
     }
@@ -76,10 +79,8 @@ const streamInComments = function () {
                     if (created > previousCommentUTC) {
                         commentEmitter.emit('comment', comment);
                     }
-                })
-                console.log("checking comment at index of buffer: ", process.env.BUFFER);
-                console.log("comment: ", submission.comments[process.env.BUFFER].body);
-                previousCommentUTC = parseInt(submission.comments[process.env.BUFFER].created_utc);
+                })    
+                previousCommentUTC = parseInt(submission.comments[0].created_utc);
             });
     }, timeout);
 }

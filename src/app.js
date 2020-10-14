@@ -5,6 +5,5 @@ const mongo = require('./config/mongo');
 (async () => {
     await mongo.connect();
 })();
-
 const thread = require('./util/threadStreamGenerator');
 thread.streamUnreads();

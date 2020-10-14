@@ -21,7 +21,7 @@ db.on('error', function (err) {
     process.exit();
 });
 db.once('open', function () {
-    console.log("connected to mongodb")
+    console.log("successfully connected to mongodb".green);
 });
 
 const Schema = mongoose.Schema;

@@ -58,7 +58,11 @@ async function processCommand(command, item) {
                     }
 
                     // Finally, update the user in the database
+                    try {
                     await updateUser(command, item);
+                    } catch(err){
+                        return errorMessage(item,"Something went wrong storing your data! Please try again later and contact an admin for a fix!");
+                    }
                     // And reply with a link to the wiki
                     await replyWithLink(command, item);
 
