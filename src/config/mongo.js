@@ -6,7 +6,7 @@ const pages = new WikiPages();
 const __ = require('colors');
 
 async function connect() {
-    return mongoose.connect('mongodb://localhost/userdata', {
+    await mongoose.connect('mongodb://localhost/userdata', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
