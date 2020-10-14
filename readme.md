@@ -24,7 +24,7 @@ To enable the wiki system, navigate to 'community settings' (https://reddit.com/
 Click the dropdown and select 'mods only' to allow mods to edit the pages.\
 Once your bot account is configred, you'll have to give it mod access to edit these pages.\
 It will also need mod access to set the selected sort of a command thread to new.\
-Be sure that Karma and Age of Reddit account fields are also set to 0.\
+Be sure that Karma and Age of Reddit account fields are also set to 0.
 
 
 Make sure you have the correct version of NodeJS for your system. You can find the download here (https://nodejs.org/en/download/).
