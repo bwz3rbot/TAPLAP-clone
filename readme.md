@@ -5,6 +5,8 @@
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Usage](#usage)
+- [Backing Up Your Data](#backup)
+- [Wiki Page Example](#example)
 
 ## About <a name = "about"></a>
 
@@ -96,7 +98,12 @@ If anything goes wrong during the installation or you wish to start fresh, you m
 
  It will watch the thread you set in THREAD_ID for commands as explained in the generated wiki.
 
- Here's an example of how your wiki should look:
+ ## Backing Up Your Data <a name = "backup"></a>
+
+It's strongly recommended that you back up your database! That is where all your user data is stored and if anything happens to it, its not going to be a good time for your subreddit. Luckily I have included a backup script for you to run which will automatically store a copy of your database for you. Just keep it somewhere safe. If anything happens to your bot's database, just delete the corrupt one and paste in the backup. It should all work out just fine. Any questions or comments can be sent to (https://reddit.com/u/bwz3r)
+
+
+ ## Here's an example of how your Wiki should look: <a name = "example"></a>
 
  -----
 
