@@ -8,7 +8,7 @@ class User {
         this.reviews = [];
         this.reviewCount = 0;
     }
-    addReview = function (rating, type, comments, permalink) {
+    addReview(rating, type, comments, permalink) {
         const review = new Review(rating, type, comments, permalink);
         this.reviewCount++;
         this.reviews.push(review);

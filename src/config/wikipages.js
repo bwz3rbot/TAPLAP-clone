@@ -32,7 +32,7 @@ class WikiPages {
         }
         this.list = this.generateList()
     }
-    generateList = function () {
+    generateList() {
         const arr = new Array();
         for (const [k, v] of Object.entries(this.subcat)) {
             arr.push(v)
