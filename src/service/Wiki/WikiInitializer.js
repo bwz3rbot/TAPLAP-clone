@@ -25,6 +25,8 @@ async function initWikiPages() {
 }
 
 async function generateIndex() {
+    const welcome =
+        `#${process.env.WIKI_WELCOME_MESSAGE}\n`
     const introduction =
         `#User Directory\nHere is a directory of all users who have traded on r/${process.env.MASTER_SUB} along with links to the trade discussion threads.\n\nAll users are stored alphabetically. Usernames beginning with special characters can be found within the ${md.apply("etc",md.bold_italic)} section.\n\n`
     const directory = generateDirectory("userdirectory");
@@ -36,7 +38,7 @@ async function generateIndex() {
         md.apply(`!rate u/Bwz3r 5 stars sale We had a great interaction! I'm rating u/Bwz3r 5 stars!`, md.codeblock) + "\n\n" +
         `This command will be processed by the bot and will find u/Bwz3r within the database. If the user does not exist within the database, the user will be added to the list of reviewed users and will retain the rating given along with any comments, and a link to the command comment. Any future ratings received by this user will be added to their file and any changes made will be instantly updated in the user directory under their alphabetized page. Users scores will be averaged according to number of reviews / scores rounded down. Stars will be awarded each user according to their calculated average rating. Any questions or errors found while using the bot can be submitted to u/Bwz3r. Thank you for reading!`
 
-    let fullmsg = introduction + "\n\n" + directory + "\n\n" + howToUse
+    let fullmsg = welcome + introduction + "\n\n" + directory + "\n\n" + howToUse
 
     console.log(`Generating about page: r/${process.env.MASTER_SUB}/wiki/${pages.category}`)
     await requester.getSubreddit(process.env.MASTER_SUB).getWikiPage(`${pages.category}`).edit({
@@ -67,7 +69,7 @@ const generateDirectory = function (page) {
         const link = md.link(`https://www.reddit.com/r/${process.env.MASTER_SUB}/wiki/${pages.category}/${pagelist[i].toLowerCase()}`, text);
         links.push(link)
     }
- 
+
     let linkstring = links.join(" |\n ");
     return linkstring.concat("\n\n-----");
 

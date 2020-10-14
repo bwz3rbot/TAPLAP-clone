@@ -3,6 +3,7 @@ const {
     WikiPages
 } = require('./WikiPages');
 const pages = new WikiPages();
+const __ = require('colors');
 
 async function connect() {
     return mongoose.connect('mongodb://localhost/userdata', {
@@ -14,15 +15,13 @@ async function connect() {
 }
 
 
-const db = mongoose.connection
+let db = mongoose.connection
 db.on('error', function (err) {
     console.log('connection error:', err);
-    console.log("I don't think the database is running!");
+    console.log("I don't think the database is running!".red);
     process.exit();
 });
-db.once('open', function () {
-    console.log("successfully connected to mongodb".green);
-});
+
 
 const Schema = mongoose.Schema;
 
@@ -41,7 +40,7 @@ UserReviewTable.methods.addReview = function (rating, type, comments) {
 }
 const AlphabetizedModels = [];
 const initAlphabetizedModelsList = function () {
-    console.log("Initializing the Alphabetized models list...")
+    console.log("Initializing the Alphabetized models list...".magenta)
     for (let i = 0; i < pages.list.length; i++) {
         const UserReviewModel = mongoose.model(pages.list[i], UserReviewTable);
         AlphabetizedModels.push({
@@ -83,5 +82,6 @@ async function getUsersAsync(firstLetter) {
 module.exports = {
     connect,
     AlphabetizedModels,
-    findUsersByFirstLetter
+    findUsersByFirstLetter,
+    db
 }

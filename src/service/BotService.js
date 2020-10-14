@@ -48,6 +48,7 @@ async function processCommand(command, item) {
                 } else { // If valid username:
 
                     try {
+                        command.args[0] = await validateActualUser(command.args[0]);
                         validateUserNotRatingSelf(command.args[0], item);
                         validateRatingNumber(command.args[1]);
                         validateInteractionType(command.args[3]);
@@ -59,9 +60,9 @@ async function processCommand(command, item) {
 
                     // Finally, update the user in the database
                     try {
-                    await updateUser(command, item);
-                    } catch(err){
-                        return errorMessage(item,"Something went wrong storing your data! Please try again later and contact an admin for a fix!");
+                        await updateUser(command, item);
+                    } catch (err) {
+                        return errorMessage(item, "Something went wrong storing your data! Please try again later and contact an admin for a fix!");
                     }
                     // And reply with a link to the wiki
                     await replyWithLink(command, item);
@@ -92,8 +93,8 @@ async function replyWithLink(command, item) {
     if (dashes.test(userCategory)) {
         userCategory = "etc";
     }
-    const link = md.link(`https://www.reddit.com/r/${process.env.MASTER_SUB}/wiki/userdirectory/${userCategory}`, 'Wiki');
-    await requester.getComment(item.id).reply(`Your rating has been stored! Thanks for making this sub a better place to trade in. Go see your comment in our ${link}.`);
+    const link = md.link(`https://www.reddit.com/r/${process.env.MASTER_SUB}/wiki/userdirectory/${userCategory}#wiki_${command.args[0]}`, 'Greenhouse');
+    await requester.getComment(item.id).reply(`Your stars have been planted! Thank you for making BAPE trades the best! Go see your comment in our ${link}🌿`);
 }
 const validateRatingNumber = function (number) {
     console.log("Validating rating number...".yellow, number);
@@ -131,6 +132,35 @@ const validateUserNotRatingSelf = function (username, item) {
     if (username === item.author.name) {
         throw new Error("Nice try, but you can't rate yourself!");
     }
+}
+
+
+// Strip Slashes from username (removes '/u/' or 'u/' if existing)
+const stripSlashes = function (username) {
+    // Strip the u/ if exists
+    if (username.startsWith("u/")) {
+        username = username.replace("u/", "").trim();
+    } else if (username.startsWith("/u/")) {
+        username = username.replace("/u/", "").trim();
+    }
+    return username;
+}
+async function validateActualUser(username) {
+    username = stripSlashes(username);
+    console.log("Validating user is actually a user...".magenta);
+    console.log("Fetching user: ", username);
+    let user;
+    try {
+        user = await requester.getUser(username).fetch();
+    } catch (err) {
+        if (err) {
+            throw new Error("Are you sure that's a real user?");
+        }
+    }
+    username = user.name;
+    console.log("Validated username: ", username);
+    return username;
+
 }
 
 // Update the user

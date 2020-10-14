@@ -29,14 +29,14 @@ const getSubmission = function () {
         console.log('initializing the stream...'.magenta);
     }
 
-    console.log("Getting thread with id: ", process.env.THREAD_ID);
+    console.log("Getting thread with id: ".yellow, process.env.THREAD_ID);
     return snoowrap.getSubmission(process.env.THREAD_ID)
         .setSuggestedSort('new')
         .fetch();
 }
 
 // 2. [Assign First UTC]
-const assignFirstUTC = function (thread) {
+const assignFirstUTC = async function (thread) {
     if (logging) {
         console.log("assigning the first utc...");
         console.log("comments: ", thread.comments.length);
@@ -44,9 +44,12 @@ const assignFirstUTC = function (thread) {
 
     if (thread.comments.length === 0) {
         console.log("No comments found. Setting initial comment!".yellow);
-        return snoowrap.getSubmission(process.env.THREAD_ID).reply(`Beep Boop...`)
-            .then(streamUnreads)
-            .catch(err => console.log(err));
+        try {
+            const res = await snoowrap.getSubmission(process.env.THREAD_ID).reply(`Beep Boop...`);
+            return streamUnreads(res);
+        } catch (err) {
+            return console.log(err);
+        }
     }
     console.log("Comment found.".green);
     previousCommentUTC = parseInt(thread.comments[0].created_utc);
@@ -62,11 +65,11 @@ const assignFirstUTC = function (thread) {
 // 3. [Stream In Mentions]]
 const streamInComments = function () {
     // 3.a) Checks inbox at an interval of 20 seconds
-    setInterval(() => {
+    setInterval(async () => {
         if (logging) {
             console.log("checking again...");
         }
-        snoowrap.getSubmission(process.env.THREAD_ID)
+        await snoowrap.getSubmission(process.env.THREAD_ID)
             .setSuggestedSort('new')
             .fetch().then((submission) => {
                 if (logging) {
@@ -79,7 +82,7 @@ const streamInComments = function () {
                     if (created > previousCommentUTC) {
                         commentEmitter.emit('comment', comment);
                     }
-                })    
+                })
                 previousCommentUTC = parseInt(submission.comments[0].created_utc);
             });
     }, timeout);
@@ -87,7 +90,7 @@ const streamInComments = function () {
 
 // [Run Once Indefinately] Checks the Messaging Queue For new items, processes them.
 const newItems = [] // Messaging queue items are pushed into this array
-const runOnceIndefinately = function () {
+async function runOnceIndefinately() {
     if (logging) {
         console.log('NUMBER OF ITEMS IN THE QUEUE: ' + newItems.length);
     }
@@ -95,11 +98,11 @@ const runOnceIndefinately = function () {
     if (newItems[0] != undefined) {
         // If item exists, it is popped out of the array and handled by the BotService
         newItem = newItems.pop();
-        return actionRequester.getComment(newItem.id).fetch()
-            .then((item) => {
+        await actionRequester.getComment(newItem.id).fetch()
+            .then(async (item) => {
                 // BOT SERVICE CODE RUNS HERE!!
-                BotService.doSomething(item)
-                    .then(runOnceIndefinately);
+                const result = await BotService.doSomething(item);
+                return runOnceIndefinately(result);
             });
     } else {
         if (logging) {
@@ -107,7 +110,7 @@ const runOnceIndefinately = function () {
             console.log(formattedDate + `|  there are no items left in the queue! checking again in ${timeout} seconds...`.magenta);
         }
         setTimeout(() => {
-            runOnceIndefinately();
+            return runOnceIndefinately();
         }, timeout);
     }
 }
@@ -115,7 +118,7 @@ const runOnceIndefinately = function () {
 
 // Main Loop of the stream.
 const streamUnreads = function () {
-    getSubmission()
+    return getSubmission()
         .then(assignFirstUTC)
         .then(streamInComments);
 }
@@ -134,8 +137,8 @@ commentEmitter.once("comment", () => {
 })
 
 // Messaging Queue Popper
-commentEmitter.once("comment", () => {
-    runOnceIndefinately();
+commentEmitter.once("comment", async () => {
+    await runOnceIndefinately();
 })
 
 module.exports = {

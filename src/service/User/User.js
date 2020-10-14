@@ -28,6 +28,7 @@ class Review {
 // [Update User Function] -- called from bot commands
 async function update(command, permalink) {
     console.log("User Service processing update user request...".yellow);
+    console.log("Updating user: ".yellow, command.args[0]);
     // First strip any /u/ from the beginning of the username
     command.args[0] = stripSlashes(command.args[0]);
     // First check if user exists within the database...
@@ -38,7 +39,7 @@ async function update(command, permalink) {
         console.log("No user found. Storing new data...".red);
         await storeNewUserData(command, permalink);
     } else {
-        console.log("Found user within the database. Updating...: ".green);
+        console.log("Found user within the database. Updating... ".green);
         // If user does exist, simply add a new Review and save
         await updateUser(foundUser, command, permalink);
     }
@@ -95,7 +96,7 @@ async function storeNewUserData(command, permalink) {
 
 // Update an existing user already found within the database
 async function updateUser(user, command, permalink) {
-    console.log("Updating existing user: ", command.args[0]);
+    console.log("Updating existing user: ".yellow, command.args[0]);
     let ratingNumber = command.args[1];
     let interactionType = command.args[3];
     if (interactionType == null) {
