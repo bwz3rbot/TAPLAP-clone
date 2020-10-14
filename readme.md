@@ -25,7 +25,8 @@ It will also need mod access to set the selected sort of a command thread to new
 Be sure that Karma and Age of Reddit account fields are also set to 0.\
 
 
-Make sure you have the correct version of NodeJS for your system. You can find the download here(https://nodejs.org/en/download/)
+Make sure you have the correct version of NodeJS for your system. You can find the download here (https://nodejs.org/en/download/)\
+Also install MongoDB as this bot requires a database to function. Instructions for windows, mac and raspberry pi can be found here: (https://diyprojects.io/mongodb-part-1-installation-windows-macos-raspberry-pi/)
 
 You'll have to create a new account for your bot before you move any further.\
 And you'll have to grant the account permissions on your subreddit.\
@@ -34,12 +35,6 @@ Once the account is created, log in, go to this url(reddit.com/prefs/apps), and 
 
 
 <img src='https://i.imgur.com/yq8akJ7.png'>
-
-
-
-```
-Give examples
-```
 
 ### Installing
 Now that you've set up your bot account, granted it permissions on your subreddit, and created a script app, it's time to download the source code and paste in your environment variables.
@@ -52,7 +47,7 @@ Also have open reddit.com/prefs/apps as you'll need to copy/paste the items you'
 <strong>REDDIT_PASS</strong> is its password.\
 <strong>MASTER_SUB</strong> is the subreddit it will work on.\
 <strong>LIMIT</strong> will cause the bot to check this many items per sweep. It takes a bit longer to start up, but can accomodate for more requests the higher you set it with a maximum of 25. Setting this value higher will ensure that when stopping and restarting the bot, no requests are forgotten.\
-<strong>DEBUG_CODE</strong> and <strong>DEBUG_NETWORK</strong> can bet set to false unless any problems arise.\
+<strong>DEBUG_CODE</strong> and <strong>DEBUG_NETWORK</strong> should be set to false unless any problems arise.\
 <strong>WIKI_WELCOME_MESSAGE</strong> will be displayed in the top of your generated wiki index page.\
 <strong>THREAD_ID</strong> You will have to go into your subreddit and create a new thread. I suggest pinning it so that users can see it and easily use it. Once it is created you'll have to copy and paste the id from the url bar into this field. The bot works by latching onto this thread and setting suggested sort to new, then continously streaming in the latest requests and handling them in a queue. This field is definately required before starting your bot. It may be changed at any time if you decide to start a new command thread.\
 See the below example of a url. The id will be used in the pw.envEXAMPLE file as a reference. Copy the id from the thread you create just like this one:
@@ -82,22 +77,22 @@ Once these fields are completely filled out, remove <i>EXAMPLE</i> from the end 
 
 > pw.envEXAMPLE = pw.env
 
-Once you've got your pw.env file correctly renamed, you may use installer.sh to prepare your environment.\
+Once you've got your pw.env file correctly filled out and renamed, you may run the installer script to prepare your environment.\
 Before beginning this final step, be sure your bot account is granted admin rights on your subreddit.\
 Also be sure the wiki is enabled for your subreddit and admins have write access.\
 And finally, be absoultely sure that you have created a thread for your bot to latch onto and set it correctly to THREAD_ID in pw.env\
-Now use wikiInit.sh to initialize your wiki pages.\
+Now run the wikiInit script to initialize your wiki pages.\
 This script will generate an index page at /r/YourSub/wiki/userdirectory/\
 It will run until its created all pages for the directory, A-Z and an etc for users with - or _ in their names.\
 If anything goes wrong during the installation or you wish to start fresh, you may run it again. All data will be wiped clean from the wiki. You will be left with a fresh index page and generated wiki pages A-Z & etc.
 
 ## Usage <a name = "usage"></a>
 
- Be sure that you've set up your pw.env file correctly and run the installer.sh and wikiInit.sh, use mongo.sh to start your database server. Running this script will start mongod in the correct directory for the bot to find the files.
+ Be sure that you've set up your pw.env file correctly and have run the installer and wikiInit scripts before running the bot. Also run the mongo script to start your database server. Running this script will start mongodb in the correct directory for the bot to find the files.
 
- Always have mongo.sh running before starting the bot.\
+ Always have mongo running before starting run script.
 
- To start the bot use run.sh\
+ To start the bot use the run script.
 
  It will watch the thread you set in THREAD_ID for commands as explained in the generated wiki.
 
