@@ -43,7 +43,7 @@ $ sudo service mongodb disable
 $ cd
 $ wget https://nodejs.org/dist/latest-v5.x/node-v5.12.0-linux-armv7l.tar.gz
 $ tar -xvzf node-v5.12.0-linux-armv7l.tar.gz
-$ sudo mv node-v5.12.0-linux-armv7l.tar.gz /opt/node
+$ sudo mv node-v5.12.0-linux-armv7l /opt/node
 $ sudo mkdir /opt/bin
 $ sudo ln -s /opt/node/bin/* /opt/bin/
 https://www.computerhope.com/issues/ch001647.htm
@@ -54,11 +54,11 @@ edit the very bottom of the file:
 export PATH=$PATH:/opt/bin
 
 $ npm --version
-> 6.14.8
+> ...
 $ node -v
-> v13.13.1
+> ...
 
-I recomend a fresh install of your Pi, in case there could be any conflicting software previously installed.
+I definately recommend you run a fresh install on your pi before attempting to install anything.
 
 <b>This project has been tested to work on a Windows Machine.</b>
 
