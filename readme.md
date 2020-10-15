@@ -33,13 +33,15 @@ Next, install the correct version of NodeJS for your system. You can find the of
 Also install MongoDB as this bot requires a database to function. Official installation documentation for mongodb can be found here: https://docs.mongodb.com/manual/administration/install-community/
 
 ### Installing On a Pi
-This part is tricky. It may or may not work for you on a Raspberry Pi. The problem here, is that this bot runs on MongoDB. MongoDB is not fully supported on Raspberry Pi. You may find that when attempting to connect to the database that you get an error message. You are not alone. After countless hours of searching around this is what I've found.\
-Here is an extremely [helpful tutorial](https://yannickloriot.com/2016/04/install-mongodb-and-node-js-on-a-raspberry-pi/). It explains how to install both of these dependencies on a Raspberry Pi. Using the instructions from this tutorial will help you get your versions matched up.\
+This part is tricky. It may or may not work for you on a Raspberry Pi. The problem here, is that this bot runs on MongoDB. MongoDB is not fully supported on Raspberry Pi. You may find that when attempting to connect to the database that you get an error message. You are not alone. After countless hours of searching around this is what I've found:
+
+
+Here is an extremely [helpful tutorial](https://yannickloriot.com/2016/04/install-mongodb-and-node-js-on-a-raspberry-pi/). It explains how to install both of these dependencies on a Raspberry Pi. Using the instructions from this tutorial will help you get your versions matched up.
 
 Here is the official node version repository if you decide you need a different version for your OS version: https://nodejs.org/dist/
 
 Here are the commands I used for you to copy and paste. Hopefully they will work for your system.\
-<sub>(I definately recommend you run a fresh install on your pi before attempting to install anything.)</sub>
+(I definately recommend you run a fresh install on your pi before attempting to install anything.)
 ```
 # Update your pi's package manager:
 $ sudo apt-get update
@@ -51,7 +53,7 @@ $ sudo apt-get install mongodb-server
 # Disable the service as it will automatically run at startup, and we don't want that.
 $ sudo service mongodb disable
 
-# Download a zipped copy of node.js v5.9.1:
+# Download a compressed copy of node.js v5.9.1 from the official repository:
 $ cd
 $ wget https://nodejs.org/dist/v5.9.1/node-v5.9.1-linux-armv7l.tar.gz
 
