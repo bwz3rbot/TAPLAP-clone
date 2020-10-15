@@ -36,14 +36,14 @@ Also install MongoDB as this bot requires a database to function. Official insta
 This part is tricky. It may or may not work for you on a Raspberry Pi. The problem here, is that this bot runs on MongoDB. MongoDB is not fully supported on Raspberry Pi. You may find that when attempting to connect to the database that you get an error message. You are not alone. After countless hours of searching around this is what I've found:
 
 
-Here is an extremely [helpful tutorial](https://yannickloriot.com/2016/04/install-mongodb-and-node-js-on-a-raspberry-pi/). It explains how to install both of these dependencies on a Raspberry Pi. Using the instructions from this tutorial will help you get your versions matched up.
+Here is an extremely [helpful tutorial](https://yannickloriot.com/2016/04/install-mongodb-and-node-js-on-a-raspberry-pi/). It explains how to install both of these dependencies on a Raspberry Pi. Using these instructions will help you get your versions matched up.
 
-Here is the official node version repository if you decide you need a different version for your OS version: https://nodejs.org/dist/
+Here is the official node version repository if you decide you need a different version for your OS: https://nodejs.org/dist/
 
-Here are the commands I used for you to copy and paste. Hopefully they will work for your system.\
-(I definately recommend you run a fresh install on your pi before attempting to install anything.)
+Here are the commands I used for you to copy and paste. Hopefully they will work for your Pi.\
+(I definately recommend that you run a fresh install on your Pi before attempting to install anything.)
 ```
-# Update your pi's package manager:
+# Update your Pi's package manager:
 $ sudo apt-get update
 $ sudo apt-get upgrade
 
