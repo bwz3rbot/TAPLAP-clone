@@ -4,11 +4,12 @@
 
 - [About](#about)
 - [Getting Started](#getting_started)
-- [Usage](#usage)
+- [Prerequisites](#pres)
 - [😞 Installing Node.js And MongoDB On A Pi](#rpi)
 - [Setting Up Your Script App](#script_app)
 - [Environment Variables](#env_var)
 - [Preparing the Bot and Initializing Your Wiki Pages](#prepare)
+- [Usage](#usage)
 - [Backing Up Your Data](#backup)
 - [Wiki Page Example](#example)
 
@@ -21,7 +22,7 @@ Further instructions on how to format commands are defined below, and will be au
 
 These instructions will get you a copy of the project up and running on your local machine.
 
-### Prerequisites
+### Prerequisites <a name = "pres"></a>
 
 The first step if you have not done so yet is to enable the wiki for your subreddit.\
 To enable the wiki system, navigate to 'community settings' (https://reddit.com/r/SUB/about/edit/) and select the 'wiki' heading.\
