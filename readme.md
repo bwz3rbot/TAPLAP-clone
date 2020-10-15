@@ -74,13 +74,14 @@ $ cd
 $ sudo nano .bashrc
 ```
 
-include the following line at the very bottom of this file:\
+With nano open to the .bashrc file, include the following line at the very end of the file:
 ```
 export PATH=$PATH:/opt/bin
 ```
+ctrl+x to exit nano editor and select yes to save the file.
 
 
-Now close and reopen your terminal. Run these commands to be sure that you've installed node correctly:
+Now close and reopen your terminal. Run these commands and If you've done everything correctly, they should output as such:
 ```
 $ npm --version
 > 3.7.3
