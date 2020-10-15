@@ -43,7 +43,7 @@ async function generateIndex() {
     console.log(`Generating about page: r/${process.env.MASTER_SUB}/wiki/${pages.category}`)
     await requester.getSubreddit(process.env.MASTER_SUB).getWikiPage(`${pages.category}`).edit({
         text: fullmsg,
-        reason: "initial testing"
+        reason: "Automatically generated about page."
     });
 }
 
@@ -53,7 +53,7 @@ async function generatePage(page) {
 
     await requester.getSubreddit(process.env.MASTER_SUB).getWikiPage(`${pages.category}/${page}`).edit({
         text: dir,
-        reason: "initial testing"
+        reason: "Automatically generated page."
     });
 }
 

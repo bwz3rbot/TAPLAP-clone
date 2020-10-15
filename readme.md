@@ -5,6 +5,10 @@
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Usage](#usage)
+- [😞 Installing Node.js And MongoDB On A Pi](#rpi)
+- [Setting Up Your Script App](#script_app)
+- [Environment Variables](#env_var)
+- [Preparing the Bot and Initializing Your Wiki Pages](#prepare)
 - [Backing Up Your Data](#backup)
 - [Wiki Page Example](#example)
 
@@ -32,65 +36,61 @@ Next, install the correct version of NodeJS for your system. You can find the of
 
 Also install MongoDB as this bot requires a database to function. Official installation documentation for mongodb can be found here: https://docs.mongodb.com/manual/administration/install-community/
 
-### Installing Node.js And MongoDB On A Pi
-This part is tricky. It may or may not work for you on a Raspberry Pi. The problem here, is that this bot runs on MongoDB. MongoDB is not fully supported on Raspberry Pi. You may find that when attempting to connect to the database that you get an error message. You are not alone. After countless hours of searching around this is what I've found:
+### Installing Node.js And MongoDB On A Pi <a name = "rpi"></a>
+
+This part is tricky. It may or may not work for you on a Raspberry Pi. The problem here, is that this bot runs on MongoDB. MongoDB is not fully supported on Raspberry Pi. You may find that when attempting to connect to the database that you get an error message. <strong>You are not alone.</strong> After countless hours of searching around for answers I still wasn't able to come up with a working solution. The general concensous from the community for running any code on an RPi, is that you should always choose SQLite over NoSQL in terms of combatibility. Unfortunately, the Pi just isn't up to date with everything like more mainstream operating systems are. This is something I'll have to keep in mind for future projects. But for now, if you'd like to keep trying here is where I left off:
 
 
-Here is an extremely [helpful tutorial](https://yannickloriot.com/2016/04/install-mongodb-and-node-js-on-a-raspberry-pi/). It explains how to install both of these dependencies on a Raspberry Pi. Using these instructions will help you get your versions matched up.
+Here is an extremely [helpful tutorial](https://yannickloriot.com/2016/04/install-mongodb-and-node-js-on-a-raspberry-pi/). It explains how to install both of these dependencies on a Raspberry Pi. Unfortunately the version number in this guide doesn't support all the language features used in the project so Node.js v5.9.1 won't work with this bot.
 
-Here is the official node version repository if you decide you need a different version for your OS: https://nodejs.org/dist/
+Here is the official node version repository if you decide to try a different version: https://nodejs.org/dist/
 
-Here are the commands I used for you to copy and paste. Hopefully they will work for your Pi.\
-(I definately recommend that you run a fresh install on your Pi before attempting to install anything.)
+Here are the commands you should use to download and install the packages correctly. Hopefully after some more research the correct version matchup can be found.\
+I definately recommend that you run a fresh install on your Pi before attempting to install anything.
 ```
-# Update your Pi's package manager:
+## Update your Pi's package manager:
 $ sudo apt-get update
 $ sudo apt-get upgrade
 
-# Install mongodb-server:
+## Install mongodb-server:
 $ sudo apt-get install mongodb-server
 
-# Disable the service as it will automatically run a server on startup, and we don't want that.
+## Disable the service from running on startup:
 $ sudo systemctl disable mongodb
 
-# Download a compressed copy of node.js v5.9.1 from the official repository:
+## Download a compressed copy of node.js v5.9.1 from the official repository:
+    1. Navigate to https://nodejs.org/ and choose a version to download from
+    2. Be sure the file you choose ends with (linux-armv7l.tar.gz)
+    3. Swap out the link below and the filenames for the one you choose
 $ cd
 $ wget https://nodejs.org/dist/v5.9.1/node-v5.9.1-linux-armv7l.tar.gz
 
-# Untar the file:
+## Untar the file:
 $ tar -xvzf node-v5.9.1-linux-armv7l.tar.gz
 
-# Move it to folder /opt/node
+## Move it to folder (/opt/node):
 $ sudo mv node-v5.9.1-linux-armv7l /opt/node
 
-# Make a new folder /opt/bin
+## Make a new folder (/opt/bin):
 $ sudo mkdir /opt/bin
 
-# Create a symbolic link to the binary:
+## Create a symbolic link to the binary:
 $ sudo ln -s /opt/node/bin/* /opt/bin/
 
-# Edit your .bashrc file and include the binaries in your $PATH variable:
+## Edit your .bashrc file and include the binaries in your $PATH variable:
 $ cd
 $ sudo nano .bashrc
-```
 
-With nano open to the .bashrc file, include the following line at the very end of the file:
-```
+## With nano open to the .bashrc file, include the following line at the very end of the file to add node to your system path:
 export PATH=$PATH:/opt/bin
-```
-Exit nano and save the file.
 
-
-Test that it worked:
-```
+## Exit nano and save the file.
+## Test that it worked, first close and re-open your terminal window. Then:
 $ echo $PATH
 > /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games:/opt/bin
-```
-(:/opt/bin) Should be echod at the end of your path now.
 
-
-Now close and reopen your terminal. Run these commands and If you've done everything correctly, they should output as such:
-```
+## (:/opt/bin) Should be added at the end of your path now.
+## Now run these commands to be sure that you've installed node correctly and verify your version:
 $ npm --version
 > 3.7.3
 $ node -v
@@ -98,9 +98,9 @@ $ node -v
 ```
 
 
-<b>This project has been tested to work on a Windows Machine.</b>
+<b>This project has been tested to work on a Windows Machine. It is most likely able to run just fine on a mac.</b>
 
-### Setting Up Your Script App
+### Setting Up Your Script App <a name = "script_app"></a>
 
 You'll have to create a new account for your bot before you move any further.\
 And you'll have to grant the account permissions on your subreddit.\
@@ -110,7 +110,7 @@ Once the account is created, log in, go to this url(reddit.com/prefs/apps), and 
 
 <img src='https://i.imgur.com/yq8akJ7.png'>
 
-### Environment Variables
+## Environment Variables <a name = "env_var"></a>
 Now that you've set up your bot account, granted it permissions on your subreddit, and created a script app, it's time to download the source code and paste in your environment variables.
 
 Download the .zip file containing the source code on this page. Unzip it and save it to your computer somewhere. Now open up the pw.envEXAMPLE file.\
@@ -151,7 +151,7 @@ Once these fields are completely filled out, remove <i>EXAMPLE</i> from the end 
 
 > pw.envEXAMPLE = pw.env
 
-### Preparing the Bot to Run
+## Preparing the Bot and Initializing Your Wiki Pages <a name = "prepare"></a>
 
 Once you've got your pw.env file correctly filled out and renamed, you may create a directory for your database, install dependencies with npm, then run the WikiPagesInstaller script.\
 Before running installers, be sure your bot account is granted admin rights on your subreddit.\
@@ -172,21 +172,37 @@ If anything goes wrong during the installation or you wish to start fresh, you m
 
 ## Usage <a name = "usage"></a>
 
+
  Be sure that you've set up your pw.env file correctly and have run the installer and wikiInit scripts before running the bot.\
- Also before using the run script you must use the mongo script to run your mongo server in the correct location.\
+ Also before using the run script you must use the mongo script to run your mongo server in the correct location.
+
+-----
+ ## Linux Mac and RPi
  The first time you use the script you must make it executable:
  ```
  $ sudo chmod +x mongo.sh
  ```
- Also while you're here you should make the run script executable:
+ Also while you're here you should make the run script executable as well:
  ```
  $ sudo chmod +x run.sh
  ```
 Now that these two files have been given execute permissions on your device, they can be run.
 
-Always have mongo running before starting run script.
+Always have mongo running before starting run script. To run mongo, run this command from within the root folder:
+```
+./mongo.sh
+```
 
-To start the bot use the run script.
+To start the bot, use the run script from within the root folder:
+```
+./run.sh
+```
+-----
+## Windows
+
+Windows users may simply click mongo.bat to run mongo, then click run.bat to run the bot.
+
+-----
 
 It will watch the thread you set in THREAD_ID for commands as explained in the generated wiki.
 
