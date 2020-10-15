@@ -33,6 +33,30 @@ Make sure you have the correct version of NodeJS for your system. You can find t
 Also install MongoDB as this bot requires a database to function. Official installation documentation for mongodb can be found here: https://docs.mongodb.com/manual/administration/install-community/
 
 Here is an extremely [helpful tutorial](https://yannickloriot.com/2016/04/install-mongodb-and-node-js-on-a-raspberry-pi/) I found that may will instruct you on how to install both of these dependencies on a Raspberry Pi. Using the package downloads from this tutorial together will ensure that your versions are correctly matched up.\
+
+Here are the commands I used for you to copy and paste. These worked on my Pi. Hopefully they will work on yours as well.
+$ sudo apt-get update
+$ sudo apt-get upgrade
+$ sudo apt-get install mongodb-server
+$ sudo service mongodb disable
+$ cd
+$ wget https://nodejs.org/dist/latest-v5.x/node-v5.12.0-linux-armv7l.tar.gz
+$ tar -xvzf node-v5.12.0-linux-armv7l.tar.gz
+$ sudo mv node-v5.12.0-linux-armv7l.tar.gz /opt/node
+$ sudo mkdir /opt/bin
+$ sudo ln -s /opt/node/bin/* /opt/bin/
+https://www.computerhope.com/issues/ch001647.htm
+$ cd
+$ sudo nano .bashrc
+
+edit the very bottom of the file:
+export PATH=$PATH:/opt/bin
+
+$ npm --version
+> 6.14.8
+$ node -v
+> v13.13.1
+
 I recomend a fresh install of your Pi, in case there could be any conflicting software previously installed.
 
 <b>This project has been tested to work on a Windows Machine.</b>
