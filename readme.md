@@ -32,7 +32,7 @@ Next, install the correct version of NodeJS for your system. You can find the of
 
 Also install MongoDB as this bot requires a database to function. Official installation documentation for mongodb can be found here: https://docs.mongodb.com/manual/administration/install-community/
 
-### Installing On a Pi
+### Installing Node.js And MongoDB On A Pi
 This part is tricky. It may or may not work for you on a Raspberry Pi. The problem here, is that this bot runs on MongoDB. MongoDB is not fully supported on Raspberry Pi. You may find that when attempting to connect to the database that you get an error message. You are not alone. After countless hours of searching around this is what I've found:
 
 
@@ -92,6 +92,8 @@ $ node -v
 
 <b>This project has been tested to work on a Windows Machine.</b>
 
+### Setting Up Your Script App
+
 You'll have to create a new account for your bot before you move any further.\
 And you'll have to grant the account permissions on your subreddit.\
 Once the account is created, log in, go to this url(reddit.com/prefs/apps), and fill out the form to create a new script app.
@@ -100,7 +102,7 @@ Once the account is created, log in, go to this url(reddit.com/prefs/apps), and 
 
 <img src='https://i.imgur.com/yq8akJ7.png'>
 
-### Installing
+### Environment Variables
 Now that you've set up your bot account, granted it permissions on your subreddit, and created a script app, it's time to download the source code and paste in your environment variables.
 
 Download the .zip file containing the source code on this page. Unzip it and save it to your computer somewhere. Now open up the pw.envEXAMPLE file.\
@@ -140,6 +142,8 @@ https://www.reddit.com/r/Bwz3rBot/comments/ja6v32/bot_command_thread/
 Once these fields are completely filled out, remove <i>EXAMPLE</i> from the end of the filename.
 
 > pw.envEXAMPLE = pw.env
+
+### Preparing the Bot to Run
 
 Once you've got your pw.env file correctly filled out and renamed, you may create a directory for your database, install dependencies with npm, then run the WikiPagesInstaller script.\
 Before running installers, be sure your bot account is granted admin rights on your subreddit.\
