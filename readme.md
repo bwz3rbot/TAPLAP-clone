@@ -32,33 +32,57 @@ Make sure you have the correct version of NodeJS for your system. You can find t
 
 Also install MongoDB as this bot requires a database to function. Official installation documentation for mongodb can be found here: https://docs.mongodb.com/manual/administration/install-community/
 
-Here is an extremely [helpful tutorial](https://yannickloriot.com/2016/04/install-mongodb-and-node-js-on-a-raspberry-pi/) I found that may will instruct you on how to install both of these dependencies on a Raspberry Pi. Using the package downloads from this tutorial together will ensure that your versions are correctly matched up.\
+### Installing On a Pi
+Here is an extremely [helpful tutorial](https://yannickloriot.com/2016/04/install-mongodb-and-node-js-on-a-raspberry-pi/) I found that may will instruct you on how to install both of these dependencies on a Raspberry Pi. Using the instructions from this tutorial will ensure that your versions are correctly matched up.\
 
-Here are the commands I used for you to copy and paste. These worked on my Pi. Hopefully they will work on yours as well.
+Here are the commands I used for you to copy and paste. These worked on my Pi. Hopefully they will work on yours as well.\
+I definately recommend you run a fresh install on your pi before attempting to install anything.
 ```
+# Update your pi's package manager:
 $ sudo apt-get update
 $ sudo apt-get upgrade
+
+# Install mongodb-server:
 $ sudo apt-get install mongodb-server
+
+# Disable the service as it will automatically run at startup, and we don't want that.
 $ sudo service mongodb disable
+
+# Download a zipped copy of node.js v5.9.1:
 $ cd
-$ wget https://nodejs.org/dist/latest-v5.x/node-v5.12.0-linux-armv7l.tar.gz
-$ tar -xvzf node-v5.12.0-linux-armv7l.tar.gz
-$ sudo mv node-v5.12.0-linux-armv7l /opt/node
+$ wget https://nodejs.org/dist/v5.9.1/node-v5.9.1-linux-armv7l.tar.gz
+
+# Untar the file:
+$ tar -xvzf node-v5.9.1-linux-armv7l.tar.gz
+
+# Move it to folder /opt/node
+$ sudo mv node-v5.9.1-linux-armv7l /opt/node
+
+# Make a new folder /opt/bin
 $ sudo mkdir /opt/bin
+
+# Create a symbolic link to the binary:
 $ sudo ln -s /opt/node/bin/* /opt/bin/
-https://www.computerhope.com/issues/ch001647.htm
+
+# Edit your .bashrc file and include the binaries in your $PATH variable:
 $ cd
 $ sudo nano .bashrc
 ```
-edit the very bottom of the file:
+
+include the following line at the very bottom of this file:\
+```
 export PATH=$PATH:/opt/bin
+```
 
+
+Now close and reopen your terminal. Run these commands to be sure that you've installed node correctly:
+```
 $ npm --version
-> ...
+> 3.7.3
 $ node -v
-> ...
+> v5.9.1
+```
 
-I definately recommend you run a fresh install on your pi before attempting to install anything.
 
 <b>This project has been tested to work on a Windows Machine.</b>
 
