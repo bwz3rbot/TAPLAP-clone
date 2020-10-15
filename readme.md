@@ -105,7 +105,7 @@ $ node -v
 
 You'll have to create a new account for your bot before you move any further.\
 And you'll have to grant the account permissions on your subreddit.\
-Once the account is created, log in, go to this url(reddit.com/prefs/apps), and fill out the form to create a new script app.
+Once the account is created, log in, go to [reddit.com/prefs/apps](https://www.reddit.com/prefs/apps) to fill out the form to create a new script app.
 
 
 
