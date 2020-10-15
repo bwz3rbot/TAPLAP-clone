@@ -50,8 +50,8 @@ $ sudo apt-get upgrade
 # Install mongodb-server:
 $ sudo apt-get install mongodb-server
 
-# Disable the service as it will automatically run at startup, and we don't want that.
-$ sudo service mongodb disable
+# Disable the service as it will automatically run a server on startup, and we don't want that.
+$ sudo systemctl disable mongodb
 
 # Download a compressed copy of node.js v5.9.1 from the official repository:
 $ cd
@@ -78,7 +78,15 @@ With nano open to the .bashrc file, include the following line at the very end o
 ```
 export PATH=$PATH:/opt/bin
 ```
-ctrl+x to exit nano editor and select yes to save the file.
+Exit nano and save the file.
+
+
+Test that it worked:
+```
+$ echo $PATH
+> /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games:/opt/bin
+```
+(:/opt/bin) Should be echod at the end of your path now.
 
 
 Now close and reopen your terminal. Run these commands and If you've done everything correctly, they should output as such:
