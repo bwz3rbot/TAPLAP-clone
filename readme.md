@@ -27,16 +27,19 @@ It will also need mod access to set the selected sort of a command thread to new
 Be sure that Karma and Age of Reddit account fields are also set to 0.
 
 
-Make sure you have the correct version of NodeJS for your system. You can find the official downloads here https://nodejs.org/en/download/
+Next, install the correct version of NodeJS for your system. You can find the official downloads here: https://nodejs.org/en/download/
 
 
 Also install MongoDB as this bot requires a database to function. Official installation documentation for mongodb can be found here: https://docs.mongodb.com/manual/administration/install-community/
 
 ### Installing On a Pi
-Here is an extremely [helpful tutorial](https://yannickloriot.com/2016/04/install-mongodb-and-node-js-on-a-raspberry-pi/) I found that may will instruct you on how to install both of these dependencies on a Raspberry Pi. Using the instructions from this tutorial will ensure that your versions are correctly matched up.\
+This part is tricky. It may or may not work for you on a Raspberry Pi. The problem here, is that this bot runs on MongoDB. MongoDB is not fully supported on Raspberry Pi. You may find that when attempting to connect to the database that you get an error message. You are not alone. After countless hours of searching around this is what I've found.\
+Here is an extremely [helpful tutorial](https://yannickloriot.com/2016/04/install-mongodb-and-node-js-on-a-raspberry-pi/). It explains how to install both of these dependencies on a Raspberry Pi. Using the instructions from this tutorial will help you get your versions matched up.\
 
-Here are the commands I used for you to copy and paste. These worked on my Pi. Hopefully they will work on yours as well.\
-I definately recommend you run a fresh install on your pi before attempting to install anything.
+Here is the official node version repository if you decide you need a different version for your OS version: https://nodejs.org/dist/
+
+Here are the commands I used for you to copy and paste. Hopefully they will work for your system.\
+<sub>(I definately recommend you run a fresh install on your pi before attempting to install anything.)</sub>
 ```
 # Update your pi's package manager:
 $ sudo apt-get update
