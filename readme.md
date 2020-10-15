@@ -35,6 +35,7 @@ Also install MongoDB as this bot requires a database to function. Official insta
 Here is an extremely [helpful tutorial](https://yannickloriot.com/2016/04/install-mongodb-and-node-js-on-a-raspberry-pi/) I found that may will instruct you on how to install both of these dependencies on a Raspberry Pi. Using the package downloads from this tutorial together will ensure that your versions are correctly matched up.\
 
 Here are the commands I used for you to copy and paste. These worked on my Pi. Hopefully they will work on yours as well.
+```
 $ sudo apt-get update
 $ sudo apt-get upgrade
 $ sudo apt-get install mongodb-server
@@ -48,7 +49,7 @@ $ sudo ln -s /opt/node/bin/* /opt/bin/
 https://www.computerhope.com/issues/ch001647.htm
 $ cd
 $ sudo nano .bashrc
-
+```
 edit the very bottom of the file:
 export PATH=$PATH:/opt/bin
 
