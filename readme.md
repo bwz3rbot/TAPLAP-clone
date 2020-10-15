@@ -184,7 +184,7 @@ It will watch the thread you set in THREAD_ID for commands as explained in the g
 
 ## Backing Up Your Data <a name = "backup"></a>
 
-It's strongly recommended that you back up your database! That is where all your user data is stored and if anything happens to it, its not going to be a good time for your subreddit. Luckily it's very easy to just copy the database directory from the folder and keep it somewhere safe. If anything happens to your bot's database, just delete the corrupt one and paste in the backup. It should all work out just fine. <strong>You should also note that you should never attempt this while the database is running. The files will not be correctly copied and will possibly destroy your data.</strong> Any questions or comments can be sent to (https://reddit.com/u/bwz3r)
+It's strongly recommended that you back up your database! That is where all your user data is stored and if anything happens to it, its not going to be a good time for your subreddit. Luckily it's very easy to just copy the database directory from the folder and keep it somewhere safe. If anything happens to your bot's database, just delete the corrupt one and paste in the backup. It should all work out just fine. <strong>You should also note that you should never attempt this while the database is running. The files will not be correctly copied and will possibly destroy your data.</strong> Any questions or comments can be sent to [u/bwz3r](https://reddit.com/u/bwz3r). Thank you!
 
 ## Here's an example of how your Wiki should look: <a name = "example"></a>
 
