@@ -39,7 +39,6 @@ const getSubmission = function () {
 async function assignFirstUTC(thread) {
     if (logging) {
         console.log("assigning the first utc...");
-        console.log("comments: ", thread.comments.length);
     }
 
     if (thread.comments.length === 0) {
@@ -51,7 +50,7 @@ async function assignFirstUTC(thread) {
             return console.log(err);
         }
     }
-    console.log("Comment found.".green);
+    console.log(`${thread.comments.length} comment(s) found.`.green);
     previousCommentUTC = parseInt(thread.comments[0].created_utc);
     let count = 0;
     thread.comments.forEach(comment => {
@@ -90,7 +89,12 @@ const streamInComments = function () {
 
 // [Run Once Indefinately] Checks the Messaging Queue For new items, processes them.
 const newItems = [] // Messaging queue items are pushed into this array
+let firstPass = true;
 async function runOnceIndefinately() {
+    if (firstPass && logging) {
+        console.log("Checking for new messages...".bgBlack.white);
+    }
+
     if (logging) {
         console.log('NUMBER OF ITEMS IN THE QUEUE: ' + newItems.length);
     }
@@ -105,10 +109,12 @@ async function runOnceIndefinately() {
                 return runOnceIndefinately(result);
             });
     } else {
-        if (logging) {
+        if (firstPass && logging) {
             formattedDate = dateFormat(Date.now());
-            console.log(formattedDate + `|  there are no items left in the queue! checking again in ${timeout} seconds...`.magenta);
+            console.log(formattedDate + `|  there are no items in the queue! checking again in ${timeout*.100} seconds...`.bgBlack.white);
+            firstPass = false;
         }
+
         setTimeout(() => {
             return runOnceIndefinately();
         }, timeout);

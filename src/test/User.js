@@ -21,7 +21,6 @@ const User = require('../service/User/User');
     }
     let interactionType;
 
-
     console.log("Length of args: ", command.args.length);
     // Validate Interaction Type
 

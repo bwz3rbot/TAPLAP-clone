@@ -78,13 +78,11 @@ async function processCommand(command, item) {
             await requester.getComment(item.id).reply(`Check out our ${wikiLink} for more information on how to use this bot!`);
             return;
 
-
         default: // Command directive not recognized
             console.log(`Error processing command. Replying with error message 'oops'.`.red);
             await errorMessage(item, "Oops!");
             break;
     }
-
 }
 
 async function replyWithLink(command, item) {
