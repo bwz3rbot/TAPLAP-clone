@@ -11,7 +11,7 @@
 - [Preparing the Bot and Initializing Your Wiki Pages](#prepare)
 - [Usage](#usage)
 - [Backing Up Your Data](#backup)
-    - [Wiki Revitalizer](#revitalizer)
+    - [Wiki Revitalizer](#revitalizer) `( UPDATE! )`
 - [Wiki Page Example](#example)
 
 ## About <a name = "about"></a>
