@@ -4,7 +4,7 @@
   "description": "r/TakeAPlantLeaveAPlant bot clone",
   "main": "src/app.js",
   "scripts": {
-    "test": "node src/test/WikiEditor.js",
+    "test": "node src/test/ValidRating.js",
     "start": "start cmd . /k mongod --dbpath ./database && start cmd . /k node src/app.js",
     "initDB": "start cmd . /k mongod --dbpath ./database",
     "runs": "npm run initDB && node src/app.js",

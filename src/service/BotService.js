@@ -48,9 +48,10 @@ async function processCommand(command, item) {
                 } else { // If valid username:
 
                     try {
+                        validateRatingNumber(command.args[1]);
                         command.args[0] = await validateActualUser(command.args[0]);
                         validateUserNotRatingSelf(command.args[0], item);
-                        validateRatingNumber(command.args[1]);
+
                         validateInteractionType(command.args[3]);
                     } catch (err) {
                         if (err) {
@@ -96,17 +97,22 @@ async function replyWithLink(command, item) {
     const link = md.link(`https://www.reddit.com/r/${process.env.MASTER_SUB}/wiki/userdirectory/${userCategory}#wiki_${command.args[0]}`, 'Greenhouse');
     await requester.getComment(item.id).reply(`Your stars have been planted! Thank you for making BAPE trades the best! Go see your comment in our ${link}🌿`);
 }
+
+
+
 const validateRatingNumber = function (number) {
-    console.log("Validating rating number...".yellow, number);
-    let testNumber = new RegExp(/[^0-5]/);
+    console.log("Validating rating number...".magenta);
+    if (number[0] == '\\' || number[0] == '-') {
+        throw new Error("Rating must be a number between 0 and 5.")
+    }
+    const validRating = new RegExp(/[0-5]/);
     if (number) {
-        if (testNumber.test(parseInt(number))) {
-            throw new Error("Rating be a number between 0 and 5.")
+        if (!validRating.test(number)) {
+            throw new Error("Rating must be a number between 0 and 5.")
         }
     }
-
-
 }
+
 const validateInteractionType = function (type) {
     console.log("Validating the interaction type...".magenta);
     if (type &&
@@ -148,7 +154,7 @@ const stripSlashes = function (username) {
 async function validateActualUser(username) {
     username = stripSlashes(username);
     console.log("Validating user is actually a user...".magenta);
-    console.log("Fetching user: ", username);
+    console.log("Fetching user: ".yellow, username);
     let user;
     try {
         user = await requester.getUser(username).fetch();
@@ -158,7 +164,7 @@ async function validateActualUser(username) {
         }
     }
     username = user.name;
-    console.log("Validated username: ", username);
+    console.log("Validated username: ".yellow, username);
     return username;
 
 }
