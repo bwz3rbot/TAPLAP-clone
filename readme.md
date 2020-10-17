@@ -11,6 +11,7 @@
 - [Preparing the Bot and Initializing Your Wiki Pages](#prepare)
 - [Usage](#usage)
 - [Backing Up Your Data](#backup)
+    - [Wiki Revitalizer](#revitalizer)
 - [Wiki Page Example](#example)
 
 ## About <a name = "about"></a>
@@ -191,12 +192,12 @@ Now that these two files have been given execute permissions on your device, the
 
 Always have mongo running before starting run script. To run mongo, run this command from within the root folder:
 ```
-./mongo.sh
+$ ./mongo.sh
 ```
 
 To start the bot, use the run script from within the root folder:
 ```
-./run.sh
+$ ./run.sh
 ```
 -----
 ## Windows
@@ -209,7 +210,16 @@ It will watch the thread you set in THREAD_ID for commands as explained in the g
 
 ## Backing Up Your Data <a name = "backup"></a>
 
-It's strongly recommended that you back up your database! That is where all your user data is stored and if anything happens to it, its not going to be a good time for your subreddit. Luckily it's very easy to just copy the database directory from the folder and keep it somewhere safe. If anything happens to your bot's database, just delete the corrupt one and paste in the backup. It should all work out just fine. <strong>You should also note that you should never attempt this while the database is running. The files will not be correctly copied and will possibly destroy your data.</strong> Any questions or comments can be sent to [u/bwz3r](https://reddit.com/u/bwz3r). Thank you!
+It's strongly recommended that you back up your database! That is where all your user data is stored and if anything happens to it, its not going to be a good time for your subreddit. Luckily it's very easy to just copy the database directory from the folder and keep it somewhere safe. If anything happens to your bot's database, just delete the corrupt one and paste in the backup. It should all work out just fine. <strong>You should also note that you should never attempt this while the database is running. The files will not be correctly copied and will possibly destroy your data.</strong>
+
+
+## Wiki Revitalizer <a name ="revitalizer"></a>
+
+I have also included a script that will allow you to refresh the data in wiki. Simply run this command to refresh the wiki with the users in your database:
+```
+$ node src/install/WikiRevitalizer.js true
+```
+This command will refresh the __index__ page of your wiki. Setting the `fullRefreshFlag` to _true_  will tell the bot to go through your entire database and update every page with the users it finds. Simply leaving the flag empty or setting it to `false` when running this script will generate the __index__ page only.
 
 ## Here's an example of how your Wiki should look: <a name = "example"></a>
 

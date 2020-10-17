@@ -5,7 +5,7 @@ const mongo = require('../config/mongo');
 mongo.connect();
 
 const WikiInitializer = require('../service/Wiki/WikiInitializer');
-const fullRefreshFlag = process.argv[2];
+const fullRefreshFlag = JSON.parse(process.argv[2] || false);
 mongo.db.once('open', async () => {
     console.log("successfully connected to mongodb".green);
     console.log("Running the Wiki Pages Revitalizer... flag set to: ", fullRefreshFlag);
