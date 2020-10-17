@@ -1,6 +1,7 @@
 const {
     WikiPages
 } = require('../../config/wikipages');
+const WikiEditor = require('../Wiki/WikiEditor');
 const pages = new WikiPages();
 const pagelist = pages.list;
 const {
@@ -9,16 +10,53 @@ const {
 const md = new Markdown();
 const requester = require('../../config/snoo').wikiRequester;
 
+/* Run Installer */
+async function runInstaller() {
+    await initWikiPages()
+}
+
+/* Run Revitalizer */
+async function runRevitalizer(fullRefreshFlag) {
+    console.log("Wiki Initializer is running the revitalizer with flag set to: ", fullRefreshFlag);
+    console.log("Generating the index...");
+    await generateIndex();
+    console.log("Finished generating the index");
+
+
+    if (fullRefreshFlag) {
+        console.log("fullRefreshFlag set to true. Refreshing all pages...");
+        console.log("iterating over pageList: ", pagelist);
+
+        for await (const page of pagelist) {
+            console.log("generating page: ", page);
+            try {
+                console.log(`Sending this to the wiki editor: userdirectory/${page.toLowerCase()}`)
+                await WikiEditor.editWikiPage(`userdirectory/${page.toLowerCase()}`);
+            } catch (err) {
+                if (err) {
+                    console.log("there was this error while editing the current wiki page: ", err);
+
+                }
+            }
+        }
+    }
+
+
+
+}
+
 // Initialize the Wiki Pages
 async function initWikiPages() {
     console.log("Initializing the wiki pages! Please wait....");
 
     await generateIndex();
+    console.log("Iterating over this pageList: ", pagelist);
     for await (page of pagelist) {
         try {
+            console.log("Generating this page: ", page);
             await generatePage(page);
         } catch (err) {
-            console.log(err)
+            if (err) console.log(err);
         }
     }
     console.log("All done!")
@@ -94,10 +132,9 @@ async function editWikiPage(page) {
 
 }
 
-async function runInstaller() {
-    await initWikiPages()
-}
+
 
 module.exports = {
-    runInstaller
+    runInstaller,
+    runRevitalizer
 }

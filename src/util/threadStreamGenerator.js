@@ -29,7 +29,7 @@ const getSubmission = function () {
         console.log('initializing the stream...'.magenta);
     }
 
-    console.log("Getting thread with id: ".yellow, process.env.THREAD_ID);
+    console.log(`Finding thread @(https://www.reddit.com/r/Bwz3rBot/comments/${process.env.THREAD_ID}): `.yellow, process.env.THREAD_ID);
     return snoowrap.getSubmission(process.env.THREAD_ID)
         .setSuggestedSort('new')
         .fetch();
@@ -139,7 +139,7 @@ commentEmitter.on("comment", (item) => {
 
 // Startup Message
 commentEmitter.once("comment", () => {
-    console.log(`Please wait while I check the last ${limit} comments that may have been missed while I was offline...`.bgBlack.yellow);
+    console.log(`Please wait while I check the last ${limit} comment(s) that may have been missed while I was offline...`.bgBlack.yellow);
 })
 
 // Messaging Queue Popper

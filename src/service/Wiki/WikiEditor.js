@@ -32,18 +32,31 @@ const generateDirectory = function (page) {
 // Edit Wiki Page
 async function editWikiPage(page) {
     console.log("Building new Wiki Page: ".yellow, page);
- 
+
     // Get the correct page and generate a directory
     let p = page.replace("userdirectory/", "");
     const dir = generateDirectory(p.toUpperCase());
 
     // Find the correct model for the alphabetized page
     const foundModel = mongo.AlphabetizedModels.find(model => model.category === p);
+    console.log("Found this model: ", foundModel);
     let CategorizedUsers;
-    await foundModel.model.find({}, (err, users) => {
-        CategorizedUsers = users;
-    })
+    try {
+        await foundModel.model.find({}, (err, users) => {
+            if (err) console.log("There was an error getting the users!".red);
+            else {
+                CategorizedUsers = users;
+            }
+        });
+    } catch (err) {
+        if (err) {
+            console.log(err)
+        }
+    }
 
+    console.log("Got all users!");
+
+    console.log("Generating a table for each user...");
     // Generate tables for each user
     const AllTables = [];
     CategorizedUsers.forEach(user => {
@@ -59,9 +72,9 @@ async function editWikiPage(page) {
         let stars = "";
         let c = 0;
         for (c; c < score; c++) {
-            stars +=STAR;
+            stars += STAR;
         }
-        for(c; c<5;c++){
+        for (c; c < 5; c++) {
             stars += STAR0;
         }
 
