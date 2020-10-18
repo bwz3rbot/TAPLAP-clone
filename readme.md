@@ -14,7 +14,9 @@
     - [Windows](#windows)
 - [Backing Up Your Data](#backup)
     - [Wiki Revitalizer](#revitalizer)`(UPDATE 10-17-20)`
-- [Wiki Page Example](#example)
+- [Wiki Pages Examples](#example) 
+    - [Index Example](#wiki.index)
+    - [Categorized User Tables Example](#wiki.users) `(UPDATE 10-17-20)`
 
 ## About <a name = "about"></a>
 
@@ -227,6 +229,7 @@ $ node src/install/WikiRevitalizer.js true
 This command will refresh the __index__ page of your wiki. Setting the `fullRefreshFlag` to _true_  will tell the bot to go through your entire database and update every page with the users it finds. Simply leaving the flag empty or setting it to `false` will generate the __index__ page only.
 
 ## Here's an example of how your Wiki should look: <a name = "example"></a>
+## Index Example: <a name = "wiki.index"></a>
 
 -----
 
@@ -282,3 +285,53 @@ Commands must be formated with a directive of `!rate`. The first command argumen
 This command will be processed by the bot and will find u/Bwz3r within the database. If the user does not exist within the database, the user will be added to the list of reviewed users and will retain the rating given along with any comments, and a link to the command comment. Any future ratings received by this user will be added to their file and any changes made will be instantly updated in the user directory under their alphabetized page. Users scores will be averaged according to number of reviews / scores rounded down. Stars will be awarded each user according to their calculated average rating. Any questions or errors found while using the bot can be submitted to u/Bwz3r. Thank you for reading!
 
 -----
+
+## Categorized User Tables Example: <a name = "wiki.users"></a> `(UPDATE 10-17-20)`
+[A](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/a) |
+ [B](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/b) |
+ [C](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/c) |
+ [D](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/d) |
+ [E](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/e) |
+ [F](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/f) |
+ [G](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/g) |
+ [H](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/h) |
+ [I](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/i) |
+ [J](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/j) |
+ [K](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/k) |
+ [L](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/l) |
+ [M](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/m) |
+ [N](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/n) |
+ [O](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/o) |
+ [P](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/p) |
+ [Q](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/q) |
+ [R](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/r) |
+ [__S__](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/s) |
+ [T](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/t) |
+ [U](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/u) |
+ [V](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/v) |
+ [W](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/w) |
+ [X](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/x) |
+ [Y](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/y) |
+ [Z](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/z) |
+ [etc](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/etc)
+
+-----
+
+#SnootyScraper
+
+★★★★☆(average score:4, total reviews:2)
+
+|Rating|Type|Comments|Permalink|
+|:-:|:-:|:-:|:-|
+|4|sale|pretty good sale!|/r/Bwz3rBot/comments/jaha01/new_follow_thread/g95r9yj/|
+|5|trade|What a great Trade!|/r/Bwz3rBot/comments/jaha01/new_follow_thread/g95r5wu/|
+
+
+#stickRollBot
+
+★★☆☆☆(average score:2, total reviews:2)
+
+|Rating|Type|Comments|Permalink|
+|:-:|:-:|:-:|:-|
+|1|sale|horrible sale!|/r/Bwz3rBot/comments/jaha01/new_follow_thread/g95r79a/|
+|4|sale|alright sale!|/r/Bwz3rBot/comments/jaha01/new_follow_thread/g95r8ln/|
