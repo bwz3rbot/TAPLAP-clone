@@ -317,7 +317,7 @@ This command will be processed by the bot and will find u/Bwz3r within the datab
 
 -----
 
-#SnootyScraper
+## SnootyScraper
 
 ★★★★☆(average score:4, total reviews:2)
 
@@ -327,7 +327,7 @@ This command will be processed by the bot and will find u/Bwz3r within the datab
 |5|trade|What a great Trade!|/r/Bwz3rBot/comments/jaha01/new_follow_thread/g95r5wu/|
 
 
-#stickRollBot
+## stickRollBot
 
 ★★☆☆☆(average score:2, total reviews:2)
 
