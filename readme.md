@@ -4,20 +4,25 @@
 
 - [About](#about)
 - [Getting Started](#getting_started)
-- [Prerequisites](#pres)
-- [😞 Installing Node.js And MongoDB On A Pi](#rpi)
-- [Setting Up Your Script App](#script_app)
-- [Environment Variables](#env_var)
-- [Preparing the Bot and Initializing Your Wiki Pages](#prepare)
+    - [Prerequisites](#pres)
+    - [😞 Installing Node.js And MongoDB On A Pi](#rpi)
+    - [Setting Up Your Script App](#script_app)
+    - [Environment Variables](#env_var)
+    - [Preparing the Bot and Initializing Your Wiki Pages](#prepare)
 - [Usage](#usage)
+    - [Mac And Linux](#linux)
+    - [Windows](#windows)
 - [Backing Up Your Data](#backup)
     - [Wiki Revitalizer](#revitalizer)`(UPDATE 10-17-20)`
 - [Wiki Page Example](#example)
 
 ## About <a name = "about"></a>
 
-This Reddit bot will generate a user directory wiki for your subreddit. It will follow a defined command thread which allows users to rate other users they have had interactions with. Users may use the command `!rate u/bwz3r 5 stars` to give u/bwz3r a 5 star rating!\
-Further instructions on how to format commands are defined below, and will be auto-generated in your wiki upon running the wikiInitializer script.
+This Reddit bot will generate a __userdirectory__ wiki for your subreddit. It will follow a defined command thread which allows users to rate one another based upon interactions they've had while trading on your sub.
+- Use the command `!rate u/bwz3r 5 stars` to give [u/bwz3r](https://www.reddit.com/u/bwz3r) a 5 star rating!
+
+Further instructions on how to format commands will be auto-generated in your wiki.\
+An example of the wiki is displayed at the end of this readme.
 
 ## Getting Started <a name = "getting_started"></a>
 
@@ -179,7 +184,7 @@ If anything goes wrong during the installation or you wish to start fresh, you m
  Also before using the run script you must use the mongo script to run your mongo server in the correct location.
 
 -----
- ## Linux Mac and RPi
+ ## Mac And Linux <a name="linux"></a>
  The first time you use the script you must make it executable:
  ```
  $ sudo chmod +x mongo.sh
@@ -200,7 +205,7 @@ To start the bot, use the run script from within the root folder:
 $ ./run.sh
 ```
 -----
-## Windows
+## Windows <a name="windows"></a>
 
 Windows users may simply click mongo.bat to run mongo, then click run.bat to run the bot.
 
