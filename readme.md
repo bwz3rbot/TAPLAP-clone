@@ -220,7 +220,7 @@ It's strongly recommended that you back up your database! That is where all your
 
 ## Wiki Revitalizer <a name ="revitalizer"></a> `(UPDATE 10-17-20)`
 
-I have also included a script that will allow you to refresh the data in wiki. Simply run this command to refresh the wiki with the users in your database:
+I have also included a script that will allow you to refresh the data in your userdirectory wiki. Simply run this command to refresh the wiki with the users in your database:
 ```
 $ node src/install/WikiRevitalizer.js true
 ```
