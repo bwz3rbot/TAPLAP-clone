@@ -218,7 +218,7 @@ It will watch the thread you set in THREAD_ID for commands as explained in the g
 It's strongly recommended that you back up your database! That is where all your user data is stored and if anything happens to it, its not going to be a good time for your subreddit. Luckily it's very easy to just copy the database directory from the folder and keep it somewhere safe. If anything happens to your bot's database, just delete the corrupt one and paste in the backup. It should all work out just fine. <strong>You should also note that you should never attempt this while the database is running. The files will not be correctly copied and will possibly destroy your data.</strong>
 
 
-## Wiki Revitalizer <a name ="revitalizer"></a>
+## Wiki Revitalizer <a name ="revitalizer"></a> `(UPDATE 10-17-20)`
 
 I have also included a script that will allow you to refresh the data in wiki. Simply run this command to refresh the wiki with the users in your database:
 ```
