@@ -229,7 +229,9 @@ $ node src/install/WikiRevitalizer.js true
 This command will refresh the __index__ page of your wiki. Setting the `fullRefreshFlag` to _true_  will tell the bot to go through your entire database and update every page with the users it finds. Simply leaving the flag empty or setting it to `false` will generate the __index__ page only.
 
 ## Here's an example of how your Wiki should look: <a name = "example"></a>
-## Index Example: <a name = "wiki.index"></a>
+<br>
+
+# Index Example: <a name = "wiki.index"></a>
 
 -----
 
@@ -286,7 +288,9 @@ This command will be processed by the bot and will find u/Bwz3r within the datab
 
 -----
 
-## Categorized User Tables Example: <a name = "wiki.users"></a> `(UPDATE 10-17-20)`
+<br><br><br>
+
+# Categorized User Tables Example: <a name = "wiki.users"></a> `(UPDATE 10-17-20)`
 [A](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/a) |
  [B](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/b) |
  [C](https://www.reddit.com/r/Bwz3rBot/wiki/userdirectory/c) |
