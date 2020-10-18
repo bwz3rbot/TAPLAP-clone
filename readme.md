@@ -220,11 +220,11 @@ It's strongly recommended that you back up your database! That is where all your
 
 ## Wiki Revitalizer <a name ="revitalizer"></a> `(UPDATE 10-17-20)`
 
-I have also included a script that will allow you to refresh the data in your userdirectory wiki. Simply run this command to refresh the wiki with the users in your database:
+I have also included a script which will allow you to refresh the data in your __userdirectory__ wiki. Simply run this command to refresh the wiki with the users in your database:
 ```
 $ node src/install/WikiRevitalizer.js true
 ```
-This command will refresh the __index__ page of your wiki. Setting the `fullRefreshFlag` to _true_  will tell the bot to go through your entire database and update every page with the users it finds. Simply leaving the flag empty or setting it to `false` when running this script will generate the __index__ page only.
+This command will refresh the __index__ page of your wiki. Setting the `fullRefreshFlag` to _true_  will tell the bot to go through your entire database and update every page with the users it finds. Simply leaving the flag empty or setting it to `false` will generate the __index__ page only.
 
 ## Here's an example of how your Wiki should look: <a name = "example"></a>
 
